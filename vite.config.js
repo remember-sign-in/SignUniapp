@@ -10,5 +10,16 @@ export default defineConfig({
   resolve: {
     alias: ('@',path.resolve(__dirname, './src')),
     extensions: ['.js', '.jsx', '.ts', '.tsx']
-  }
+  },
+  //小程序端无效
+  // server:{
+  //   port:51030,
+  //   proxy:{
+  //     "/api":{
+  //       target:"http://127.0.0.1:4523/m1/3686108-0-default/",
+  //       changeOrigin:true,
+  //       rewrite: (path) => path.replace(/^\/api/, ""),
+  //     }
+  //   }    
+  // }
 })
