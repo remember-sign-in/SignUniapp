@@ -142,7 +142,7 @@ onLoad(async () => {
     flex-direction: row;
 
     view {
-        flex: 1
+        flex: 1;
     }
 
     .active {

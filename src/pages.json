@@ -17,6 +17,12 @@
 			"style": {
 				"navigationBarTitleText": "个人"
 			}
+		},
+		{
+			"path": "pages/class/class",
+			"style": {
+				"navigationBarTitleText": "班级管理"
+			}
 		}
 		
 	],
@@ -32,6 +38,12 @@
 			{
 				"pagePath": "pages/user/index",
 				"text": "个人",
+				"selectedIconPath": "static/user_selected.png",
+				"iconPath": "static/user_default.png"
+			},
+			{
+				"pagePath": "pages/class/class",
+				"text": "班级",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			}
