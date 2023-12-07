@@ -9,7 +9,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: ('@',path.resolve(__dirname, './src')),
-    extensions: ['.js', '.jsx', '.ts', '.tsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx',]
   },
   //小程序端无效
   // server:{

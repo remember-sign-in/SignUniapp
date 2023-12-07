@@ -1,5 +1,5 @@
 <template>
-index
+班级管理
 </template>
 <script setup>
 
