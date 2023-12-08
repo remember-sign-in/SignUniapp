@@ -7,11 +7,8 @@
             <button class="login" >
                 登录/注册
             </button>
-            
-            <img src="/static/logo.png" alt="" class="icon">
-            
+            <img src="/static/logo.png" alt="" class="icon">  
         </view>
-		
     </view>
 </template>
 
