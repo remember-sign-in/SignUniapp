@@ -23,7 +23,20 @@
 			"style": {
 				"navigationBarTitleText": "班级管理"
 			}
+		},
+		{
+			"path": "pages/class/ready_to_sign",
+			"style": {
+				"navigationBarTitleText": "发起签到"
+			}
+		},
+		{
+			"path": "pages/class/start_to_sign",
+			"style": {
+				"navigationBarTitleText": "开始签到"
+			}
 		}
+		
 		
 	],
 	//底部导航栏
@@ -44,6 +57,18 @@
 			{
 				"pagePath": "pages/class/class",
 				"text": "班级",
+				"selectedIconPath": "static/user_selected.png",
+				"iconPath": "static/user_default.png"
+			},
+			{
+				"pagePath": "pages/class/ready_to_sign",
+				"text": "发起签到",
+				"selectedIconPath": "static/user_selected.png",
+				"iconPath": "static/user_default.png"
+			},
+			{
+				"pagePath": "pages/class/start_to_sign",
+				"text": "开始签到",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			}

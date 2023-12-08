@@ -24,7 +24,8 @@
         </view>
     </view>
 </template>
-  
+   
+
 <script setup>
 import { ref, reactive } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
