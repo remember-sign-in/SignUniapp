@@ -71,30 +71,29 @@ new view({
         // 行排列
         display: flex;
         flex-direction: row;
-    }
-    .pictrue{
+        .pictrue{
         height: 80px;
         width: 80px;
         margin-left: 20px;
         margin-top: 10px;
         border-radius: 50%;
-    }
-    .data{
-        margin-top: 15px;
-        margin-left: 10px;
-        
-        flex-direction: column;
-        justify-content: space-around;
-    }
-    .change{
+        }
+        .data{
+            margin-top: 15px;
+            margin-left: 10px;
+            
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        .change{
         height: 30px;
         width: 30px;
         background-image: url("/static/logo.png");
         align-self: center;
         background-size: cover;
         margin-right: 30px;
+        }
     }
-
     .compose{
         height: 100%;
         width: 100%;
