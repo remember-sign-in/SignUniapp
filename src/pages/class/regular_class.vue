@@ -18,7 +18,7 @@
             <uni-easyinput prefixIcon="search" v-model="searchContent" placeholder="根据学号/名字搜索学员" @iconClick="iconClick">
             </uni-easyinput>
         </view>
-
+        
         <view class="cardList" v-for="(item, index) in cardList" :key="index">
             <uni-card :title="item.stuName" :sub-title="joinString(joinString('班级:', item.stuclass,),joinString('——学号:', item.stunumbers,))" :extra="item.numbers"
                  @tap="onClick">

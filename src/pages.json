@@ -13,29 +13,47 @@
 			}
 		},
 		{
-			"path": "pages/user/index",
+			"path": "pages/user/yes_login",
 			"style": {
 				"navigationBarTitleText": "个人"
 			}
 		},
 		{
-			"path": "pages/class/class",
+			"path": "pages/class/regular_class",
 			"style": {
 				"navigationBarTitleText": "班级管理"
 			}
 		},
 		{
-			"path": "pages/class/ready_to_sign",
+			"path": "pages/user/changedata",
 			"style": {
-				"navigationBarTitleText": "发起签到"
+				"navigationBarTitleText": "修改信息"
 			}
 		},
 		{
-			"path": "pages/class/start_to_sign",
+			"path": "pages/user/register",
 			"style": {
-				"navigationBarTitleText": "开始签到"
+				"navigationBarTitleText": "注册"
 			}
 		}
+		// {
+		// 	"path": "pages/class/addclass",
+		// 	"style": {
+		// 		"navigationBarTitleText": "加入班级"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/class/createclass",
+		// 	"style": {
+		// 		"navigationBarTitleText": "创建班级"
+		// 	}
+		// }
+		// {
+		// 	"path": "pages/class/studentlist",
+		// 	"style": {
+		// 		"navigationBarTitleText": "学生列表"
+		// 	}
+		// }
 		
 		
 	],
@@ -49,35 +67,48 @@
 				"iconPath": "static/home_default.png"
 			},
 			{
-				"pagePath": "pages/user/index",
+				"pagePath": "pages/user/yes_login",
 				"text": "个人",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			},
 			{
-				"pagePath": "pages/class/class",
+				"pagePath": "pages/class/regular_class",
 				"text": "班级",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			},
 			{
-				"pagePath": "pages/class/ready_to_sign",
-				"text": "发起签到",
+				"pagePath": "pages/user/changedata",
+				"text": "修改信息",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			},
 			{
-				"pagePath": "pages/class/start_to_sign",
-				"text": "开始签到",
+				"pagePath": "pages/user/register",
+				"text": "注册",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			}
 			// {
-			// 	"pagePath": "pages/my/index",
-			// 	"text": "首页2",
+			// 	"pagePath": "pages/class/addclass",
+			// 	"text": "加入班级",
+			// 	"selectedIconPath": "static/user_selected.png",
+			// 	"iconPath": "static/user_default.png"
+			// },
+			// {
+			// 	"pagePath": "pages/class/createclass",
+			// 	"text": "创建班级",
+			// 	"selectedIconPath": "static/user_selected.png",
+			// 	"iconPath": "static/user_default.png"
+			// },
+			// {
+			// 	"pagePath": "pages/class/studentlist",
+			// 	"text": "学生列表",
 			// 	"selectedIconPath": "static/user_selected.png",
 			// 	"iconPath": "static/user_default.png"
 			// }
+			
 		]
 	},
 	"globalStyle": {
