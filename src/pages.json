@@ -25,15 +25,9 @@
 			}
 		},
 		{
-			"path": "pages/class/start_to_sign_24",
+			"path": "pages/class/pages_9",
 			"style": {
-				"navigationBarTitleText": "签到码"
-			}
-		},
-		{
-			"path": "pages/class/start_to_sign_25",
-			"style": {
-				"navigationBarTitleText": "定位签到"
+				"navigationBarTitleText": "考勤记录"
 			}
 		}
 		// {
@@ -104,17 +98,12 @@
 				"iconPath": "static/user_default.png"
 			},
 			{
-				"pagePath": "pages/class/start_to_sign_24",
-				"text": "签到码",
-				"selectedIconPath": "static/user_selected.png",
-				"iconPath": "static/user_default.png"
-			},
-			{
-				"pagePath": "pages/class/start_to_sign_25",
-				"text": "定位签到",
+				"pagePath": "pages/class/pages_9",
+				"text": "考勤记录",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			}
+			
 			// {
 			// 	"pagePath": "pages/home/head-nologin",
 			// 	"text": "首页未登录",
