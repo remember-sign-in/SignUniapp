@@ -7,35 +7,60 @@
 	  },
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/home/index",
+			"path": "pages/home/index_3",
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
 		},
 		{
-			"path": "pages/user/yes_login",
+			"path": "pages/user/yes_login_17",
 			"style": {
 				"navigationBarTitleText": "个人"
 			}
 		},
 		{
-			"path": "pages/class/regular_class",
+			"path": "pages/class/regular_class_19",
 			"style": {
 				"navigationBarTitleText": "班级管理"
 			}
 		},
 		{
-			"path": "pages/user/changedata",
+			"path": "pages/class/start_to_sign_24",
 			"style": {
-				"navigationBarTitleText": "修改信息"
+				"navigationBarTitleText": "签到码"
 			}
 		},
 		{
-			"path": "pages/user/register",
+			"path": "pages/class/start_to_sign_25",
 			"style": {
-				"navigationBarTitleText": "注册"
+				"navigationBarTitleText": "定位签到"
 			}
 		}
+		// {
+		// 	"path": "pages/home/head-nologin",
+		// 	"style": {
+		// 		"navigationBarTitleText": "首页"
+		// 	}
+		// }
+		// ,
+		// {
+		// 	"path": "pages/home/createdclass",
+		// 	"style": {
+		// 		"navigationBarTitleText": "已创建班级"
+		// 	}
+		// }
+		// {
+		// 	"path": "pages/user/changedata",
+		// 	"style": {
+		// 		"navigationBarTitleText": "修改信息"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/user/register",
+		// 	"style": {
+		// 		"navigationBarTitleText": "注册"
+		// 	}
+		// }
 		// {
 		// 	"path": "pages/class/addclass",
 		// 	"style": {
@@ -61,35 +86,59 @@
 	"tabBar": {
 		"list": [
 			{
-				"pagePath": "pages/home/index",
+				"pagePath": "pages/home/index_3",
 				"text": "首页",
 				"selectedIconPath": "static/home_selected.png",
 				"iconPath": "static/home_default.png"
 			},
 			{
-				"pagePath": "pages/user/yes_login",
+				"pagePath": "pages/user/yes_login_17",
 				"text": "个人",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			},
 			{
-				"pagePath": "pages/class/regular_class",
+				"pagePath": "pages/class/regular_class_19",
 				"text": "班级",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			},
 			{
-				"pagePath": "pages/user/changedata",
-				"text": "修改信息",
+				"pagePath": "pages/class/start_to_sign_24",
+				"text": "签到码",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			},
 			{
-				"pagePath": "pages/user/register",
-				"text": "注册",
+				"pagePath": "pages/class/start_to_sign_25",
+				"text": "定位签到",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			}
+			// {
+			// 	"pagePath": "pages/home/head-nologin",
+			// 	"text": "首页未登录",
+			// 	"selectedIconPath": "static/user_selected.png",
+			// 	"iconPath": "static/user_default.png"
+			// },
+			// {
+			// 	"pagePath": "pages/home/createdclass",
+			// 	"text": "已创建班级",
+			// 	"selectedIconPath": "static/user_selected.png",
+			// 	"iconPath": "static/user_default.png"
+			// }
+			// {
+			// 	"pagePath": "pages/user/changedata",
+			// 	"text": "修改信息",
+			// 	"selectedIconPath": "static/user_selected.png",
+			// 	"iconPath": "static/user_default.png"
+			// },
+			// {
+			// 	"pagePath": "pages/user/register",
+			// 	"text": "注册",
+			// 	"selectedIconPath": "static/user_selected.png",
+			// 	"iconPath": "static/user_default.png"
+			// }
 			// {
 			// 	"pagePath": "pages/class/addclass",
 			// 	"text": "加入班级",

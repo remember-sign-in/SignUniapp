@@ -16,8 +16,8 @@
                 thumbnail="/static/logo.png" @tap="onClick">
                 <view class="sub-Container">邀请码:{{ item.code }}
                     <view class="subFun">
-                        <button @tap="startSign">发起签到</button>
-                        <button @tap="toClass">班级管理</button>
+                        <button @tap="startSign">签到</button>
+                        <button @tap="toClass">签到记录</button>
                     </view>
                 </view>
             </uni-card>
@@ -112,7 +112,6 @@ const startSign = () => {
 const toClass = () => {
     console.log('not finish');
 }
-
 //Onload
 onLoad(async () => {
     // console.log('->>>>>>>>>>>')

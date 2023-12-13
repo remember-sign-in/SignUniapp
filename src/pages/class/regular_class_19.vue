@@ -72,7 +72,7 @@ const joinString = (str1, str2) => {
 .countpicture{
     height: 200px;
     width: 100%;
-    background-color: rgb(150, 175, 225);
+    background-color: rgb(191, 209, 243);
     // 行排列
     display: flex;
     flex-direction: column;
