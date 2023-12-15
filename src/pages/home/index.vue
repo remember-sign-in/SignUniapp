@@ -1,7 +1,7 @@
 <template>
     <view>
         <view>
-            <uni-easyinput prefixIcon="search" v-model="searchContent" placeholder="左侧图标" @iconClick="iconClick">
+            <uni-easyinput prefixIcon="search" v-model="searchContent" placeholder="啦啦啦" @iconClick="iconClick">
             </uni-easyinput>
         </view>
         <view class="options">
@@ -12,12 +12,12 @@
             </view>
         </view>
         <view class="cardList" v-for="(item, index) in cardList" :key="index">
-            <uni-card :title="item.className" :sub-title="joinString('课程名:', item.courseName)" :extra="item.numbers"
-                thumbnail="/static/logo.png" @tap="onClick">
-                <view class="sub-Container">邀请码:{{ item.code }}
+            <uni-card :title="item.name"  :extra="item.numbers+'人'"
+                thumbnail="/static/logo.png" >
+                <view class="sub-Container">邀请码:{{ item.joinCode }}
                     <view class="subFun">
-                        <button @tap="startSign">发起签到</button>
-                        <button @tap="toClass">班级管理</button>
+                        <button @tap="startSign(item.id)">发起签到</button>
+                        <button @tap="toClass(item.id)">班级管理</button>
                     </view>
                 </view>
             </uni-card>
@@ -27,76 +27,58 @@
    
 
 <script setup>
-import { ref, reactive } from 'vue';
-import { onLoad } from '@dcloudio/uni-app';
-import {getHomeList} from '@/services/home/index'
+import { ref, } from 'vue';
+import { onLoad, onShow } from '@dcloudio/uni-app';
+import home from '@/services/home/index'
+import guard from '@/permission.js'
 //const let 
 const options = [
     { name: '我创建的' },
     { name: '我加入的' },
 ]
 //ref reactive
+const id = ref(1);
 const activeBtIndex = ref(0)
 const searchContent = ref('');
-const cardList = reactive([
+const cardList = ref([
     {
-        courseName: '软件工程1',
-        className: '计算机五班1',
+        index:1,
+        name:'操作系统',
         numbers: '41人',
-        code: '123'
+        joinCode: '123',
+        id:"12"
     },
     {
-        courseName: '软件工程2',
-        className: '计算机五班2',
+        index:2,
+        name:'操作系统',
         numbers: '40人',
-        code: '123'
+        joinCode: '123',
+        id:"12"
     },
-    {
-        courseName: '软件工程2',
-        className: '计算机五班2',
-        numbers: '40人',
-        code: '123'
-    },
-    {
-        courseName: '软件工程2',
-        className: '计算机五班2',
-        numbers: '40人',
-        code: '123'
-    },
-    {
-        courseName: '软件工程2',
-        className: '计算机五班2',
-        numbers: '40人',
-        code: '123'
-    },
-    {
-        courseName: '软件工程2',
-        className: '计算机五班2',
-        numbers: '40人',
-        code: '123'
-    },
-    {
-        courseName: '软件工程2',
-        className: '计算机五班2',
-        numbers: '40人',
-        code: '123'
-    },
-    {
-        courseName: '软件工程2',
-        className: '计算机五班2',
-        numbers: '40人',
-        code: '123'
-    }
 ])
 
-//请求 ------------------------
-
-//
+//请求处理 ------------------------
+//我创建的
+const getCreateList = async() =>{
+    const res = await home.getCreateList(id.value)
+    cardList.value = res.data.items
+}
+//我加入的
+const getJoinList = async() =>{
+    const res = await home.getJoinList(id.value)
+    cardList.value = res.data.items
+}
 
 //逻辑函数 ------------------------
 //
 const changeIndex = (index) => {
     activeBtIndex.value = index;
+    if(index === 0){
+        getCreateList()
+    }
+    else {
+        getJoinList()
+    }
 }
 //凭借字符串
 const joinString = (str1, str2) => {
@@ -105,19 +87,21 @@ const joinString = (str1, str2) => {
     }
 }
 //发起签到
-const startSign = () => {
+const startSign = (id) => {
     console.log('not finish');
 }
 //跳转班级管理
-const toClass = () => {
-    console.log('not finish');
+const toClass = (id) => {
+    uni.navigateTo({
+	url: `/pages/class/index?id=${id}`
+})
 }
 
 //Onload
 onLoad(async () => {
-    // console.log('->>>>>>>>>>>')
-    const res = await getHomeList();
-    console.log(res)
+    console.log('ddddddddddddd')
+    guard()
+    getCreateList()
 })
 
 </script>

@@ -1,13 +1,15 @@
-import req from '../methods/index';
+import req from "../methods/index";
 const http = new req();
 //获取首页列表
-export const getHomeList = async (id=0) => {
-    return new Promise((resolve,reject)=>{
-        http.get(`/api/test/${id}`).then(res =>{
-            resolve(res)
-        })
-        .catch(e=>{
-            reject(e)
-        })
-    })
-}
+
+export default {
+	getJoinList(id = 0) {
+		return http.get(`/api/home/joinList/${id}`);
+	},
+	getCreateList(id = 0) {
+		return http.get(`/api/home/createList/${id}`);
+	},
+	searchList(params) {
+		return http.get(`/api/home/searchList`,params);
+	}
+};

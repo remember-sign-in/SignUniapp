@@ -7,13 +7,37 @@
 	  },
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
 			"path": "pages/home/index",
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
 		},
 		{
-			"path": "pages/user/yes_login",
+			"path": "pages/class/index",
+			"style": {
+				"navigationBarTitleText": "班级管理"
+			}
+		},
+		{
+			"path": "pages/joinCreate/com/join",
+			"style": {
+				"navigationBarTitleText": "班级详情"
+			}
+		},
+		{
+			"path": "pages/joinCreate/index",
+			"style": {
+				"navigationBarTitleText": "加入/创建"
+			}
+		},
+		{
+			"path": "pages/user/setting",
 			"style": {
 				"navigationBarTitleText": "个人"
 			}
@@ -60,6 +84,7 @@
 	//底部导航栏
 	"tabBar": {
 		"list": [
+			
 			{
 				"pagePath": "pages/home/index",
 				"text": "首页",
@@ -67,29 +92,35 @@
 				"iconPath": "static/home_default.png"
 			},
 			{
-				"pagePath": "pages/user/yes_login",
+				"pagePath": "pages/joinCreate/index",
+				"text": "加入/创建",
+				"selectedIconPath": "static/home_selected.png",
+				"iconPath": "static/home_default.png"
+			},
+			{
+				"pagePath": "pages/user/setting",
 				"text": "个人",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			},
-			{
-				"pagePath": "pages/class/regular_class",
-				"text": "班级",
-				"selectedIconPath": "static/user_selected.png",
-				"iconPath": "static/user_default.png"
-			},
-			{
-				"pagePath": "pages/user/changedata",
-				"text": "修改信息",
-				"selectedIconPath": "static/user_selected.png",
-				"iconPath": "static/user_default.png"
-			},
-			{
-				"pagePath": "pages/user/register",
-				"text": "注册",
-				"selectedIconPath": "static/user_selected.png",
-				"iconPath": "static/user_default.png"
-			}
+			// {
+			// 	"pagePath": "pages/class/regular_class",
+			// 	"text": "班级",
+			// 	"selectedIconPath": "static/user_selected.png",
+			// 	"iconPath": "static/user_default.png"
+			// },
+			// {
+			// 	"pagePath": "pages/user/changedata",
+			// 	"text": "修改信息",
+			// 	"selectedIconPath": "static/user_selected.png",
+			// 	"iconPath": "static/user_default.png"
+			// },
+			// {
+			// 	"pagePath": "pages/user/register",
+			// 	"text": "注册",
+			// 	"selectedIconPath": "static/user_selected.png",
+			// 	"iconPath": "static/user_default.png"
+			// }
 			// {
 			// 	"pagePath": "pages/class/addclass",
 			// 	"text": "加入班级",

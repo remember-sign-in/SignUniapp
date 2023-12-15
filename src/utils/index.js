@@ -44,7 +44,6 @@ export const api = (options) =>{
             ...options,
             //有响应
             success(res){   // 200 300 401 
-                console.log(res.statusCode)
                 if(res.statusCode >=200 && res.statusCode <300){
                     resolve({data:res.data,statusCode:res.statusCode});
                 }
