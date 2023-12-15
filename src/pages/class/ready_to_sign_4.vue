@@ -12,48 +12,41 @@
             </view>
             
         </view>
-        <view>
-            <uni-easyinput prefixIcon="search" v-model="searchContent" placeholder="按照姓名/学号搜索学生" @iconClick="iconClick">
-            </uni-easyinput>
+
+        <view class="signway">
+            
+            <view class="text1">签到方式:</view>
+            <view class="choices">
+                <radio-group bindchange="bandleChange" class="choices">
+                <radio color="red" value="way1" class="choice"> 签到码</radio>
+                <radio color="red" value="way2" class="choice"> 二维码</radio>
+                <radio color="red" value="way3" class="choice"> 定位签到</radio>
+                </radio-group>
+            </view> 
         </view>
-        <view class="stuList" v-for="(item, index) in studList" :key="index">
-            <uni-card :title="item.stuName" :sub-title="joinString(joinString('班级:', item.stuclass,),joinString('——学号:', item.stunumbers,))" :extra="item.numbers"
-                 @tap="onClick">
-                <button @tap="startSign" class="fuckout">踢出班级</button>
-            </uni-card>
+            
+        <view >
+            <button class="start">开始签到</button>
         </view>
     </view>
 </template>
 <script setup>
 
-const studList = ([
-    {
-        
-        stuName: '周建辉',
-        stunumbers: '20210020216516',
-        stuclass: '计算机五班1',
-    },
-    {
-        stuName: '周建辉',
-        stunumbers: '20210020216512',
-        stuclass: '计算机五班1',
-    },
-    {
-        stuName: '周建辉',
-        stunumbers: '20210020216512',
-        stuclass: '计算机五班1',
-    },
-    {
-        stuName: '周建辉',
-        stunumbers: '20210020216512',
-        stuclass: '计算机五班1',
-    },
-    {
-        stuName: '周建辉',
-        stunumbers: '20210020216512',
-        stuclass: '计算机五班1',
-    }
-])
+const Page=({
+
+data: {
+  choice: "签到码"
+},
+bandleChange(e){
+  let choice = e.detail.value;
+  // 2 把值赋值给 data 中的数据
+  this.setData({
+    // gender:gender
+    choice
+  })
+}
+})
+
 const classlist ={
     courseName: '软件工程1',
     className: '计算机五班1',
@@ -74,7 +67,7 @@ const joinString = (str1, str2) => {
 .top{
     height:80px;
     width: 100%;
-    background-color:  rgb(150, 175, 225);
+    background-color:  rgb(191, 209, 243);
     // 行排列
     display: flex;
     flex-direction: row;
@@ -101,10 +94,41 @@ const joinString = (str1, str2) => {
         margin-left: 10px;
     }
 }
-.fuckout{
+.signway{
+        height:80px;
+        width: 100%;
+        display: flex;
+        background-color: rgb(240, 240, 240);
+        align-items: center;
+        flex-direction: row;
+        .text1{
+            margin-left: 10px;
+            font-size: small;
+            width: 75px;
+           
+        }
+        .choice{
+            
+            font-size: medium;
+            width: 75px;
+            
+        }
+        .choices{
+            transform: scale(0.8)
+            
+        }
+        
+    }
+.start{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    width: 80%;
     background-color: rgb(214, 223, 247);
     &:active{
-        background-color: rgb(160, 176, 222);
+        background-color: rgb(191, 209, 243);
     }
 }
 </style>

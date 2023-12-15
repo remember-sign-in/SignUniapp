@@ -39,7 +39,7 @@ const searchContent = ref('');
     }
 
     .active {
-        background: rgb(150, 175, 225);
+        background: rgb(191, 209, 243);
     }
 }
 .mid {
@@ -59,21 +59,21 @@ const searchContent = ref('');
         width: 60%;
         height: 40px;
         border-radius: 20px;
-        border: 1px solid rgb(150, 175, 225);
+        border: 1px solid rgb(191, 209, 243);
         margin-top: 20px;
         text-align: center;
     }
     button{
         width: 50%;
         border-radius: 20px;
-        border: 1px solid rgb(150, 175, 225);
+        border: 1px solid rgb(191, 209, 243);
         margin-top: 20px;
         text-align: center;
         align-items: center;
         // 文字对齐
         background-color: rgb(203, 217, 243);
         &:active{
-            background-color: rgb(150, 175, 225);
+            background-color: rgb(191, 209, 243);
         }
     }
 }

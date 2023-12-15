@@ -12,22 +12,48 @@
             </view>
             
         </view>
-
-        <view class="signway">
-            倒计时：<uni-countdown  :show-day="false" :hour="testHour" :minute="testMinute" :second="testSecond"  />
-            <img src="/static/logo.png" alt="" class="signpicture">
-            <button class="stop">
-                停止签到
-            </button>
+        <view>
+            <uni-easyinput prefixIcon="search" v-model="searchContent" placeholder="按照姓名/学号搜索学生" @iconClick="iconClick">
+            </uni-easyinput>
         </view>
-            
-        
+        <view class="stuList" v-for="(item, index) in studList" :key="index">
+            <uni-card :title="item.stuName" :sub-title="joinString(joinString('班级:', item.stuclass,),joinString('——学号:', item.stunumbers,))" :extra="item.numbers"
+                 @tap="onClick">
+                <button @tap="startSign" class="fuckout">踢出班级</button>
+            </uni-card>
+        </view>
     </view>
 </template>
 <script setup>
-const testHour = 0;
-const testMinute = 0;
-const testSecond = 60;
+
+const studList = ([
+    {
+        
+        stuName: '周建辉',
+        stunumbers: '20210020216516',
+        stuclass: '计算机五班1',
+    },
+    {
+        stuName: '周建辉',
+        stunumbers: '20210020216512',
+        stuclass: '计算机五班1',
+    },
+    {
+        stuName: '周建辉',
+        stunumbers: '20210020216512',
+        stuclass: '计算机五班1',
+    },
+    {
+        stuName: '周建辉',
+        stunumbers: '20210020216512',
+        stuclass: '计算机五班1',
+    },
+    {
+        stuName: '周建辉',
+        stunumbers: '20210020216512',
+        stuclass: '计算机五班1',
+    }
+])
 const classlist ={
     courseName: '软件工程1',
     className: '计算机五班1',
@@ -46,9 +72,9 @@ const joinString = (str1, str2) => {
 <style lang="scss">
 
 .top{
-    height:20%;
+    height:80px;
     width: 100%;
-    background-color:  rgb(150, 175, 225);
+    background-color:  rgb(191, 209, 243);
     // 行排列
     display: flex;
     flex-direction: row;
@@ -74,27 +100,11 @@ const joinString = (str1, str2) => {
         font-size: small;
         margin-left: 10px;
     }
-    
 }
-.signway{
-        height:80%;
-        width: 100%;
-        display: flex;
-        background-color: rgb(255, 255, 255);
-        align-items: center;
-        flex-direction: column;
-        margin-top: 30px;
-        .signpicture{
-            height: 200px;
-            width: 200px;
-            margin-top: 20px;
-        }
-        .stop{
-            
-            margin-top: 20px;
-            background-color: rgb(150, 175, 225);
-            border-radius: 10px;
-        }
+.fuckout{
+    background-color: rgb(214, 223, 247);
+    &:active{
+        background-color: rgb(191, 209, 243);
     }
-
+}
 </style>

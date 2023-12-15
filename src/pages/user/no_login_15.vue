@@ -29,7 +29,7 @@ new view({
     .top{
         height:100px;
         width: 100%;
-        background-color: rgb(150, 175, 225);
+        background-color: rgb(191, 209, 243);
         // 行排列
         display: flex;
         flex-direction: row;

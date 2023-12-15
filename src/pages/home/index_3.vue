@@ -36,6 +36,7 @@ const options = [
     { name: '我创建的' },
     { name: '我加入的' },
 ]
+
 //ref reactive
 const id = ref(1);
 const activeBtIndex = ref(0)
@@ -96,7 +97,6 @@ const toClass = (id) => {
 	url: `/pages/class/index?id=${id}`
 })
 }
-
 //Onload
 onLoad(async () => {
     console.log('ddddddddddddd')

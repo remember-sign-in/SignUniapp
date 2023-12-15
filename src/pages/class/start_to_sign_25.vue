@@ -1,5 +1,5 @@
 <template>
-    <!-- 发起签到（还没点开始签到） -->
+    <!-- 定位签到） -->
     <view>
         <view class="top">
             <img src="/static/logo.png" alt="" class="pictrue">
@@ -14,39 +14,20 @@
         </view>
 
         <view class="signway">
-            
-            <view class="text1">签到方式:</view>
-            <view class="choices">
-                <radio-group bindchange="bandleChange" class="choices">
-                <radio color="red" value="way1" class="choice"> 签到码</radio>
-                <radio color="red" value="way2" class="choice"> 二维码</radio>
-                <radio color="red" value="way3" class="choice"> 定位签到</radio>
-                </radio-group>
-            </view> 
+            倒计时：<uni-countdown  :show-day="false" :hour="testHour" :minute="testMinute" :second="testSecond"  />
+            <img src="/static/logo.png" alt="" class="signpicture">
+            <button class="stop">
+                停止签到
+            </button>
         </view>
             
-        <view >
-            <button class="start">开始签到</button>
-        </view>
+        
     </view>
 </template>
 <script setup>
-
-const Page=({
-
-data: {
-  choice: "签到码"
-},
-bandleChange(e){
-  let choice = e.detail.value;
-  // 2 把值赋值给 data 中的数据
-  this.setData({
-    // gender:gender
-    choice
-  })
-}
-})
-
+const testHour = 0;
+const testMinute = 0;
+const testSecond = 60;
 const classlist ={
     courseName: '软件工程1',
     className: '计算机五班1',
@@ -65,7 +46,7 @@ const joinString = (str1, str2) => {
 <style lang="scss">
 
 .top{
-    height:80px;
+    height:20%;
     width: 100%;
     background-color:  rgb(150, 175, 225);
     // 行排列
@@ -93,42 +74,27 @@ const joinString = (str1, str2) => {
         font-size: small;
         margin-left: 10px;
     }
+    
 }
 .signway{
-        height:80px;
+        height:80%;
         width: 100%;
         display: flex;
-        background-color: rgb(240, 240, 240);
+        background-color: rgb(255, 255, 255);
         align-items: center;
-        flex-direction: row;
-        .text1{
-            margin-left: 10px;
-            font-size: small;
-            width: 75px;
-           
+        flex-direction: column;
+        margin-top: 30px;
+        .signpicture{
+            height: 200px;
+            width: 200px;
+            margin-top: 20px;
         }
-        .choice{
+        .stop{
             
-            font-size: medium;
-            width: 75px;
-            
+            margin-top: 20px;
+            background-color: rgb(191, 209, 243);
+            border-radius: 10px;
         }
-        .choices{
-            transform: scale(0.8)
-            
-        }
-        
     }
-.start{
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100px;
-    width: 80%;
-    background-color: rgb(214, 223, 247);
-    &:active{
-        background-color: rgb(160, 176, 222);
-    }
-}
+
 </style>
