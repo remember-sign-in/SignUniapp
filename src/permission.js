@@ -16,7 +16,6 @@ const config = {
 }
  const gurad = () =>{
     const token = loginStore.getToken()
-    console.log(token,'->>>>')
     if(!token) {
         uni.switchTab({
             url: '/pages/login/index'

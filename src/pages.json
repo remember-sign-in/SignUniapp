@@ -111,7 +111,7 @@
 		"list": [
 			
 			{
-				"pagePath": "pages/home/index_3",
+				"pagePath": "pages/home/index",
 				"text": "首页",
 				"selectedIconPath": "static/home_selected.png",
 				"iconPath": "static/home_default.png"

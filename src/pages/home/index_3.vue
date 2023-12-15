@@ -99,7 +99,6 @@ const toClass = (id) => {
 }
 //Onload
 onLoad(async () => {
-    console.log('ddddddddddddd')
     guard()
     getCreateList()
 })
