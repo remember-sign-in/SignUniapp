@@ -49,15 +49,9 @@
 			}
 		},
 		{
-			"path": "pages/class/start_to_sign_24",
+			"path": "pages/class/pages_9",
 			"style": {
-				"navigationBarTitleText": "签到码"
-			}
-		},
-		{
-			"path": "pages/class/start_to_sign_25",
-			"style": {
-				"navigationBarTitleText": "定位签到"
+				"navigationBarTitleText": "考勤记录"
 			}
 		}
 		// {
