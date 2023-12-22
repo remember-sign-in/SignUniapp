@@ -5,148 +5,58 @@
 			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
 		}
 	  },
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [ 
 		{
-			"path": "pages/home/index_3",
+			"path": "pages/home/home",
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
 		},
 		{
-			"path": "pages/user/yes_login_17",
+			"path": "pages/class/add",
+			"style": {
+				"navigationBarTitleText": "创建/加入"
+			}
+		},
+		{
+			"path": "pages/user/my",
 			"style": {
 				"navigationBarTitleText": "个人"
 			}
 		},
 		{
-			"path": "pages/class/regular_class_19",
+			"path": "pages/user/changedata_14",
 			"style": {
-				"navigationBarTitleText": "班级管理"
+				"navigationBarTitleText": "修改资料"
 			}
 		},
 		{
-			"path": "pages/class/pages_9",
+			"path": "pages/class/ready_to_sign_4",
 			"style": {
-				"navigationBarTitleText": "考勤记录"
+				"navigationBarTitleText": "发起签到"
 			}
 		}
-		// {
-		// 	"path": "pages/home/head-nologin",
-		// 	"style": {
-		// 		"navigationBarTitleText": "首页"
-		// 	}
-		// }
-		// ,
-		// {
-		// 	"path": "pages/home/createdclass",
-		// 	"style": {
-		// 		"navigationBarTitleText": "已创建班级"
-		// 	}
-		// }
-		// {
-		// 	"path": "pages/user/changedata",
-		// 	"style": {
-		// 		"navigationBarTitleText": "修改信息"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/user/register",
-		// 	"style": {
-		// 		"navigationBarTitleText": "注册"
-		// 	}
-		// }
-		// {
-		// 	"path": "pages/class/addclass",
-		// 	"style": {
-		// 		"navigationBarTitleText": "加入班级"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/class/createclass",
-		// 	"style": {
-		// 		"navigationBarTitleText": "创建班级"
-		// 	}
-		// }
-		// {
-		// 	"path": "pages/class/studentlist",
-		// 	"style": {
-		// 		"navigationBarTitleText": "学生列表"
-		// 	}
-		// }
-		
-		
 	],
-	//底部导航栏
 	"tabBar": {
 		"list": [
 			{
-				"pagePath": "pages/home/index_3",
+				"pagePath": "pages/home/home",
 				"text": "首页",
 				"selectedIconPath": "static/home_selected.png",
 				"iconPath": "static/home_default.png"
 			},
 			{
-				"pagePath": "pages/user/yes_login_17",
+				"pagePath": "pages/class/add",
+				"text": "创建/加入",
+				"selectedIconPath": "static/添加选中.png",
+				"iconPath": "static/添加.png"
+			},
+			{
+				"pagePath": "pages/user/my",
 				"text": "个人",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
-			},
-			{
-				"pagePath": "pages/class/regular_class_19",
-				"text": "班级",
-				"selectedIconPath": "static/user_selected.png",
-				"iconPath": "static/user_default.png"
-			},
-			{
-				"pagePath": "pages/class/pages_9",
-				"text": "考勤记录",
-				"selectedIconPath": "static/user_selected.png",
-				"iconPath": "static/user_default.png"
 			}
-			
-			// {
-			// 	"pagePath": "pages/home/head-nologin",
-			// 	"text": "首页未登录",
-			// 	"selectedIconPath": "static/user_selected.png",
-			// 	"iconPath": "static/user_default.png"
-			// },
-			// {
-			// 	"pagePath": "pages/home/createdclass",
-			// 	"text": "已创建班级",
-			// 	"selectedIconPath": "static/user_selected.png",
-			// 	"iconPath": "static/user_default.png"
-			// }
-			// {
-			// 	"pagePath": "pages/user/changedata",
-			// 	"text": "修改信息",
-			// 	"selectedIconPath": "static/user_selected.png",
-			// 	"iconPath": "static/user_default.png"
-			// },
-			// {
-			// 	"pagePath": "pages/user/register",
-			// 	"text": "注册",
-			// 	"selectedIconPath": "static/user_selected.png",
-			// 	"iconPath": "static/user_default.png"
-			// }
-			// {
-			// 	"pagePath": "pages/class/addclass",
-			// 	"text": "加入班级",
-			// 	"selectedIconPath": "static/user_selected.png",
-			// 	"iconPath": "static/user_default.png"
-			// },
-			// {
-			// 	"pagePath": "pages/class/createclass",
-			// 	"text": "创建班级",
-			// 	"selectedIconPath": "static/user_selected.png",
-			// 	"iconPath": "static/user_default.png"
-			// },
-			// {
-			// 	"pagePath": "pages/class/studentlist",
-			// 	"text": "学生列表",
-			// 	"selectedIconPath": "static/user_selected.png",
-			// 	"iconPath": "static/user_default.png"
-			// }
-			
 		]
 	},
 	"globalStyle": {
