@@ -21,10 +21,7 @@
                 </view>
             </view>
         </uni-card>
-    </view>
-       
-       
-        
+    </view> 
     </view>
     
 </template>
@@ -64,15 +61,18 @@ const cardList = ref([
         courseName: '软件工程2',
         className: '计算机五班2',
         numbers: '40人',
-        code: '123'
+        code: '123',
+        id:"12"
     },
     {
         courseName: '软件工程2',
         className: '计算机五班2',
         numbers: '40人',
-        code: '123'
+        code: '123',
+        id:"12"
     }
 ])
+
 
 //请求处理 ------------------------
 //我创建的
@@ -91,7 +91,7 @@ const getJoinList = async() =>{
 const changeIndex = (index) => {
      activeBtIndex.value = index;
      if(index === 0){
-     getCreateList()
+        getCreateList()
      }
      else {
          getJoinList()

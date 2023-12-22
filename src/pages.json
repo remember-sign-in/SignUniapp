@@ -38,6 +38,24 @@
 			"style": {
 				"navigationBarTitleText": "发起签到"
 			}
+		},
+		{
+			"path": "pages/home/head-nologin_1",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/register/register_13",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
 		}
 	],
 	"tabBar": {
@@ -60,6 +78,12 @@
 			{
 				"pagePath": "pages/user/my",
 				"text": "个人",
+				"selectedIconPath": "static/user_selected.png",
+				"iconPath": "static/user_default.png"
+			},
+			{
+				"pagePath": "pages/home/head-nologin_1",
+				"text": "登录",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			}
