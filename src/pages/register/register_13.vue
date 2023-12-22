@@ -1,119 +1,158 @@
 <template>
-    <!-- 发起签到（还没点开始签到） -->
     <view class="register">
-        
-        <view class="registerdata">
-            <view class="uni-form-item uni-column">
-                <view class="title">姓名/昵称：
-                    <input class="uni-input" v-model="username" focus placeholder="请输入姓名/工号" />
-                </view>
-                
+      <image class="logo" src="/static/logo.png"></image>
+      <form class="register-form">
+        <view class="input-item">
+            <input type="text" v-model="username" placeholder="姓名/昵称" class="theinput">
+        </view>
+            <view class="input-item">
+            <input type="text" v-model="usernum" placeholder="学号/工号" class="theinput">
             </view>
-            <view class="uni-form-item uni-column">
-                <view class="title">学号/工号：
-                    <input class="uni-input" v-model="username" focus placeholder="请输入学号/工号" />
-                </view>
+            <view class="input-item">
+            <input type="password" v-model="password" placeholder="输入密码" class="theinput">
             </view>
-            <view class="uni-form-item uni-column">
-                <view class="title">我的班级：
-                    <input class="uni-input" v-model="username" focus placeholder="请输入班级" />
-                </view>
-            </view>
-            <view class="uni-form-item uni-column">
-                <view class="title">手机号：
-                    <input class="uni-input" v-model="username" focus placeholder="请输入手机号" />
-                </view>
-                <view class="getword">
-                <button>
-                    <text>获取验证码</text>
-                </button>
-            </view>
+            <view class="input-item">
+            <input type="password" v-model="confirmPassword" placeholder="确认密码" class="theinput">
             </view>
             
-            <view class="uni-form-item uni-column">
-                <view class="title">验证码：
-                    <input class="uni-input" v-model="username" focus placeholder="请输入验证码" />
-                    
-                </view>
-                
-            </view>
-        </view>
-        <view class="changebutton">
-            <button>
-                <text>注册</text>
-            </button>
-        </view>
-        
-         
+            <button type="button" class="register-btn" @click="register">注册</button>
+      </form>
     </view>
-</template>
-<script setup>
-
-
-const datalist ={
-    stuName: '周建辉',
-    className: '计算机五班1',
-    stunumber:'201721040124',
-}
-</script>
-
-<style lang="scss">
-.register{
-    display: flex;
-    flex-direction: column;
-    float: left;
-    margin-left: 10px;
-}
-
-.registerdata{
-    width: 100%;
-    display: flex;
-    background-color: rgb(255, 255, 255);
-    align-items: center;
-    flex-direction: column;
-    float: left;
-    .uni-form-item uni-column{
-        
-        flex-direction: row;  
-    }
-    .title{
-        
-        display: flex;
-        flex-direction: row;
-        margin-top: 15px;
-        align-items: center;
-        .uni-input{
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            height: 40px;
-            width: 200px;
-            
+  </template>
+  
+  <script>
+  import axios from 'axios';
+  export default {
+    data() {
+      return {
+        usernum: '',
+        password: '',
+        confirmPassword: '',
+        username: ''
+      };
+    },
+    methods: {
+      async register() {
+        if(!this.username || !this.password || !this.usernum) {
+          uni.showToast({
+            title: '请填写完整信息',
+            icon: 'none'
+          });
+          return;
         }
+  
+        if(this.password !== this.confirmPassword) {
+          uni.showToast({
+            title: '两次输入密码不一致',
+            icon: 'none'
+          });
+          return;
+        }
+  
+        try {
+          const response = await axios.post(' ', {
+            username: this.username,
+            password: this.password,
+            usernum: this.usernum
+          });
+  
+          const responseData = response.data;
+          if(responseData.code === " ") {
+            uni.showToast({
+              title: responseData.message,
+              icon: 'success'
+            });
+            uni.navigateTo({
+              url: '/pages/login/index'
+            });
+          } else {
+            uni.showToast({
+              title: responseData.message,
+              icon: 'none'
+            });
+          }
+        } catch (error) {
+          let errorMessage = '注册失败，请稍后再试';
+          if(error.response) {
+            if(error.response.status === " ") {
+              errorMessage = error.response.data.message;
+            }
+          }
+  
+          uni.showToast({
+            title: errorMessage,
+            icon: 'none'
+          });
+        }
+      },
+      goBack() {
+        uni.navigateBack();
+      }
     }
-   
-}
-.changebutton{
-    margin-top: 10px;
-    button{
-        height: 40px;
-        width: 40%;
-        background-color: rgb(191, 209, 243);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-.getword{
-    margin-top: 10px;
-    button{
-        height: 40px;
-        width: 40%;
-        background-color: rgb(191, 209, 243);
-        display: flex;
-        font-size: small;
-        justify-content: center;
-        align-items: center;
-        
-    }
-}
-</style>
+  };
+  </script>
+  
+  
+  
+  
+  <style scoped>
+  .register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100rpx;
+  }
+  
+  .logo {
+    width: 200rpx;
+    height: 200rpx;
+    margin-bottom: 20rpx;
+  }
+  
+  .register-form {
+    width: 90%;
+    padding: 40rpx;
+    background-color: #fff;
+    border-radius: 5rpx;
+  }
+
+  .theinput{
+    font-size:medium;
+  }
+  .input-item {
+    margin: 10rpx 0;
+    border-bottom: 1rpx solid #ddd;
+  }
+  
+  input {
+    width: 100%;
+    height: 50rpx;
+    padding: 10rpx;
+    font-size: 16rpx;
+    outline: none;
+    border: none;
+  }
+  
+  .register-btn {
+    display: block;
+    margin: 30rpx auto 0;
+    width: 90%;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    background-color: #007aff;
+    color: #fff;
+    border-radius: 5rpx;
+    font-size: 20rpx;
+  }
+  
+  .back-btn {
+    margin-top: 20rpx;
+    color: #007aff;
+    width: 60%;
+    height: 80rpx;
+  }
+  </style>
+  
+  
