@@ -11,32 +11,19 @@
                 </button>
             </view>
         </view>
-        <view v-if="activeBtIndex==0">
-            <view  class="cardList" v-for="(item, index) in cardList" :key="index">
-                <uni-card :title="item.className" :sub-title="joinString('课程名:', item.courseName)" :extra="item.numbers"
-                    thumbnail="/static/logo.png" @tap="onClick">
-                    <view class="sub-Container">邀请码:{{ item.code }}
-                        <view class="subFun">
-                            <button @tap="startSign(item.id)">发起签到</button>
-                            <button @tap="toClass(item.id)">班级管理</button>
-                        </view>
-                    </view>
-                </uni-card>
+    <view  class="cardList" v-for="(item, index) in cardList" :key="index">
+        <uni-card :title="item.className" :sub-title="joinString('课程名:', item.courseName)" :extra="item.numbers"
+            thumbnail="/static/logo.png" @tap="onClick">
+            <view class="sub-Container">邀请码:{{ item.code }}
+                <view class="subFun">
+                    <button @tap="startSign(item.id)">发起签到</button>
+                    <button @tap="toClass(item.id)">班级管理</button>
+                </view>
             </view>
-        </view>
-        <view v-else>
-            <view  class="cardList" v-for="(item, index) in cardList1" :key="index">
-                <uni-card :title="item.className" :sub-title="joinString('课程名:', item.courseName)" :extra="item.numbers"
-                    thumbnail="/static/logo.png" @tap="onClick">
-                    <view class="sub-Container">邀请码:{{ item.code }}
-                        <view class="subFun">
-                            <button @tap="startSign">签到</button>
-                            <button @tap="toClass">签到记录</button>
-                        </view>
-                    </view>
-                </uni-card>
-            </view>
-        </view>
+        </uni-card>
+    </view>
+       
+       
         
     </view>
     
@@ -86,50 +73,31 @@ const cardList = ref([
         code: '123'
     }
 ])
-const cardList1 = reactive([
-    {
-        courseName: '软件工程1',
-        className: '计算机五班1',
-        numbers: '41人',
-        code: '123'
-    },
-    {
-        courseName: '软件工程2',
-        className: '计算机五班2',
-        numbers: '40人',
-        code: '123'
-    },
-    
-])
-//请求 ------------------------
-
-//
-
 
 //请求处理 ------------------------
 //我创建的
 const getCreateList = async() =>{
-    const res = await home.getCreateList(id.value)
-    cardList.value = res.data.items
+         const res = await home.getCreateList(id.value)
+         cardList.value = res.data.items
 }
 //我加入的
 const getJoinList = async() =>{
-    const res = await home.getJoinList(id.value)
-    cardList.value = res.data.items
+        const res = await home.getJoinList(id.value)
+     cardList.value = res.data.items
 }
 
 //逻辑函数 ------------------------
-//
 
 const changeIndex = (index) => {
-    activeBtIndex.value = index;
-    if(index === 0){
-        getCreateList()
-    }
-    else {
-        getJoinList()
-    }
+     activeBtIndex.value = index;
+     if(index === 0){
+     getCreateList()
+     }
+     else {
+         getJoinList()
+     }
 }
+
 //凭借字符串
 const joinString = (str1, str2) => {
     if (typeof str1 === 'string' && typeof str2 === 'string') {
@@ -137,11 +105,6 @@ const joinString = (str1, str2) => {
     }
 }
 //发起签到
-
-const startSign = () => {
-    uni.navigateTo({
-        url: "/user/ready_to_sign_4"
-    })  
 
 //跳转班级管理
 const toClass = (id) => {
