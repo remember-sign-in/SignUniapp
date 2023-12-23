@@ -17,6 +17,7 @@
                 <view class="sub-Container">邀请码:{{ item.joinCode }}
                     <view class="subFun">
                         <button @tap="startSign(item.id)">发起签到</button>
+                        <button @tap="toRecord(item.id)">签到记录</button>
                         <button @tap="toClass(item.id)">班级管理</button>
                     </view>
                 </view>
@@ -97,6 +98,12 @@ const toClass = (id) => {
 	url: `/pages/class/index?id=${id}`
 })
 }
+//跳转班级签到记录
+const toRecord = (id) =>{
+    uni.navigateTo({
+        url: `/pages/record/classRecord?id=${id}`
+    })
+}
 //Onload
 onLoad(async () => {
     guard()
@@ -117,6 +124,7 @@ onLoad(async () => {
     display: flex;
 
     button {
+        font-weight: 500;
         font-size: 80%;
     }
 }

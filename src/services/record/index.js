@@ -2,8 +2,8 @@ import req from "../methods/index";
 const http = new req();
 
 export default{
-    getRecordList(params){
-        return http.post("record/list",params);
+    getRecordList(id){
+        return http.get(`/record/list/${id}`);
     },
     getRecordDetail(params){
         return http.post("record/detail",params);

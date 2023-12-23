@@ -73,7 +73,7 @@ onLoad((options) => {
 <style>
 .rightEnd{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .line{
     display: flex;
