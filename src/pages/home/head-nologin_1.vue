@@ -14,7 +14,7 @@
         <view class="top">
             <img src="/static/logo.png" alt="" class="pictrue">
         </view>
-        <button class="login" >
+        <button class="login" @tap="onclick">
                 登录/注册
         </button>
     </view>
@@ -30,9 +30,13 @@ const options = [
     { name: '我创建的' },
     { name: '我加入的' },
 ]
-
+const onclick = () =>{
+    uni.navigateTo({
+        url: '/pages/login/index'
+    })
+}
 </script>
-  
+
   
 <style lang="scss">
 .sub-Container {
