@@ -7,13 +7,13 @@
 	  },
 	"pages": [
 		{
-			"path": "pages/class/ready_to_sign_4",
+			"path": "pages/class/add",
 			"style": {
 				"navigationBarTitleText": "发起签到"
 			}
 		},
 		{
-			"path": "pages/home/head-nologin_1",
+			"path": "pages/home/home",
 			"style": {
 				"navigationBarTitleText": "登录"
 			}
@@ -24,12 +24,7 @@
 				"navigationBarTitleText": "登录"
 			}
 		},
-		{
-			"path": "pages/register/register_13",
-			"style": {
-				"navigationBarTitleText": "注册"
-			}
-		},
+	
 		{
 			"path": "pages/register/register",
 			"style": {
@@ -55,23 +50,13 @@
 			}
 		},
 		{
-			"path": "pages/record/index",
+			"path": "pages/user/my",
 			"style": {
-				"navigationBarTitleText": "签到记录"
-			}
-		},
-		{
-			"path": "pages/record/classRecord",
-			"style": {
-				"navigationBarTitleText": "班级签到记录"
-			}
-		},
-		{
-			"path": "pages/record/selfRecord",
-			"style": {
-				"navigationBarTitleText": "个人签到记录"
+				"navigationBarTitleText": "暂无"
 			}
 		}
+	
+	
 		
 	],
 	"tabBar": {
@@ -92,23 +77,18 @@
 				"iconPath": "static/添加.png"
 			},
 			{
-				"pagePath": "pages/record/index",
-				"text": "签到记录",
-				"selectedIconPath": "static/user_selected.png",
-				"iconPath": "static/user_default.png"
-			},
-			{
-				"pagePath": "pages/user/setting",
+				"pagePath": "pages/user/my",
 				"text": "个人",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
 			},
 			{
-				"pagePath": "pages/home/head-nologin_1",
-				"text": "登录",
+				"pagePath": "pages/record/index",
+				"text": "签到记录",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
-			}
+			},
+		
 
 
 		]
