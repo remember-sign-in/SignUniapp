@@ -5,7 +5,7 @@
 			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
 		}
 	  },
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [
 		{
 			"path": "pages/login/index",
 			"style": {
@@ -71,51 +71,10 @@
 			"style": {
 				"navigationBarTitleText": "个人签到记录"
 			}
-		}
-		// {
-		// 	"path": "pages/home/head-nologin",
-		// 	"style": {
-		// 		"navigationBarTitleText": "首页"
-		// 	}
-		// }
-		// ,
-		// {
-		// 	"path": "pages/home/createdclass",
-		// 	"style": {
-		// 		"navigationBarTitleText": "已创建班级"
-		// 	}
-		// }
-		// {
-		// 	"path": "pages/user/changedata",
-		// 	"style": {
-		// 		"navigationBarTitleText": "修改信息"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/user/register",
-		// 	"style": {
-		// 		"navigationBarTitleText": "注册"
-		// 	}
-		// }
-		// {
-		// 	"path": "pages/class/addclass",
-		// 	"style": {
-		// 		"navigationBarTitleText": "加入班级"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/class/createclass",
-		// 	"style": {
-		// 		"navigationBarTitleText": "创建班级"
-		// 	}
-		// }
-		// {
-		// 	"path": "pages/class/studentlist",
-		// 	"style": {
-		// 		"navigationBarTitleText": "学生列表"
-		// 	}
-		// }
+		},
+
 		
+
 		
 	],
 	//底部导航栏

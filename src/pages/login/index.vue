@@ -43,20 +43,25 @@ const loginForm = ref({
 })
 const login = async(form = loginForm.value) =>{
     let code;
-    let data;
+    let data = {
+        data:{
+            id:"4",
+            token:"2"
+        }
+    };
     const getToken = () =>{
         return new Promise((resolve,reject)=>{
-
-            wx.login({
-                success:async (res)=>{
-                    code = res.code;
-                    data = await Login.login(code)
-                    resolve(data);
-                },
-                fail: (err)=>{
-                    reject(err);
-                }
-            })
+                resolve(3)
+            // wx.login({
+            //     success:async (res)=>{
+            //         code = res.code;
+            //         data = await Login.login(code)
+            //         resolve(data);
+            //     },
+            //     fail: (err)=>{
+            //         reject(err);
+            //     }
+            // })
         })
     }
     await getToken();
