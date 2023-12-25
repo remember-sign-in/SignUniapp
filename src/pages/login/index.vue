@@ -15,14 +15,14 @@
             style="padding:10px; background: white; height: 30px; border-radius: 30px;"
             v-model="loginForm.pwd"
             placeholder="输入密码"
-            placeholder-class="input-placeholder"
+            placeholder-class="input-placeholder" type="password"
         />
     </div>
     <div class="row">
-        <button style="margin: 15px" size="default" type="primary">
+        <button style="margin: 15px" size="default" type="primary" @tap="register">
             注册
         </button>
-        <button @tap="login" style="margin: 15px" size="default" type="primary">
+        <button @tap="login" style="margin: 15px" size="default" type="primary" >
             登录
         </button>
     </div>
@@ -70,7 +70,11 @@ const login = async(form = loginForm.value) =>{
      loginStore.setId(id.trim());
      guard();
 }
-
+const register = () =>{
+    uni.navigateTo({
+        url: '/pages/register/register_13'
+    })
+}
 onLoad(()=>{
     guard();
 })
@@ -83,7 +87,14 @@ onLoad(()=>{
 	display: flex;
     width: 90%;
     height: 10vh;
+    margin-top: 10px;
     justify-content: center;
+    button {
+        width: 30%;
+        height: 100%;
+        border-radius: 30px;
+        
+    }
 }
 
 .container {

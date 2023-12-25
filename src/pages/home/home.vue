@@ -1,7 +1,8 @@
+
 <template>
     <view>
         <view>
-            <uni-easyinput prefixIcon="search" @input="search" v-model="searchContent" placeholder="啦啦啦" @iconClick="iconClick">
+            <uni-easyinput prefixIcon="search" v-model="searchContent" placeholder="啦啦啦" @iconClick="iconClick">
             </uni-easyinput>
         </view>
         <view class="options">
@@ -11,19 +12,19 @@
                 </button>
             </view>
         </view>
-        <view class="cardList" v-for="(item, index) in tempList" :key="index">
-            <uni-card :title="item.name"  :extra="item.numbers+'人'"
-                thumbnail="/static/logo.png" >
-                <view class="sub-Container">邀请码:{{ item.joinCode }}
-                    <view class="subFun">
-                        <button @tap="startSign(item.id)">发起签到</button>
-                        <button @tap="toRecord(item.id)">签到记录</button>
-                        <button @tap="toClass(item.id)">班级管理</button>
-                    </view>
+    <view  class="cardList" v-for="(item, index) in cardList" :key="index">
+        <uni-card :title="item.className" :sub-title="joinString('课程名:', item.courseName)" :extra="item.numbers"
+            thumbnail="/static/logo.png" @tap="onClick">
+            <view class="sub-Container">邀请码:{{ item.code }}
+                <view class="subFun">
+                    <button @tap="startSign(item.id)">发起签到</button>
+                    <button @tap="toClass(item.id)">班级管理</button>
                 </view>
-            </uni-card>
-        </view>
+            </view>
+        </uni-card>
+    </view> 
     </view>
+    
 </template>
    
 
@@ -42,7 +43,6 @@ const options = [
 const id = ref(1);
 const activeBtIndex = ref(0)
 const searchContent = ref('');
-const tempList = ref([])
 const cardList = ref([
     {
         index:1,
@@ -53,53 +53,52 @@ const cardList = ref([
     },
     {
         index:2,
-        name:'计网',
+        name:'操作系统',
         numbers: '40人',
         joinCode: '123',
         id:"12"
     },
+    {
+        courseName: '软件工程2',
+        className: '计算机五班2',
+        numbers: '40人',
+        code: '123',
+        id:"12"
+    },
+    {
+        courseName: '软件工程2',
+        className: '计算机五班2',
+        numbers: '40人',
+        code: '123',
+        id:"12"
+    }
 ])
+
 
 //请求处理 ------------------------
 //我创建的
 const getCreateList = async() =>{
-    const res = await home.getCreateList(id.value)
-    cardList.value = res.data.items
-    tempList.value = res.data.items;
+         const res = await home.getCreateList(id.value)
+         cardList.value = res.data.items
 }
 //我加入的
 const getJoinList = async() =>{
-    const res = await home.getJoinList(id.value)
-    cardList.value = res.data.items
-    tempList.value = res.data.items;
+        const res = await home.getJoinList(id.value)
+     cardList.value = res.data.items
 }
-
 
 //逻辑函数 ------------------------
-//
+
 const changeIndex = (index) => {
-    activeBtIndex.value = index;
-    if(index === 0){
+     activeBtIndex.value = index;
+     if(index === 0){
         getCreateList()
-    }
-    else {
-        getJoinList()
-    }
+     }
+     else {
+         getJoinList()
+     }
 }
-//搜索
-const search = (val) =>{
-    if(val === ""){
-        tempList.value = cardList.value
-        return;
-    }
-    const filter = (arr,ori,val) =>{
-        arr.value = ori.value.filter(item=>{
-            let content = item.name.toString();
-            return content.includes(val);
-        })
-    }
-    filter(tempList,cardList,val);
-}
+
 //凭借字符串
 const joinString = (str1, str2) => {
     if (typeof str1 === 'string' && typeof str2 === 'string') {
@@ -107,20 +106,12 @@ const joinString = (str1, str2) => {
     }
 }
 //发起签到
-const startSign = (id) => {
-    console.log('not finish');
-}
+
 //跳转班级管理
 const toClass = (id) => {
     uni.navigateTo({
 	url: `/pages/class/index?id=${id}`
 })
-}
-//跳转班级签到记录
-const toRecord = (id) =>{
-    uni.navigateTo({
-        url: `/pages/record/classRecord?id=${id}`
-    })
 }
 //Onload
 onLoad(async () => {
@@ -142,7 +133,6 @@ onLoad(async () => {
     display: flex;
 
     button {
-        font-weight: 500;
         font-size: 80%;
     }
 }

@@ -7,9 +7,13 @@
                 </button>
             </view>
         </view>
-        <view class="mid">
+        <view v-if="activeBtIndex==0" class="mid">
             <view class="smallimg"></view>
-            
+            <input type="text" placeholder="邀请码" class="inputtext">
+            <button>加入班级</button>
+        </view>
+        <view v-else class="mid">
+            <view class="smallimg"></view>
             <input type="text" placeholder="课程名称" class="inputtext">
             <input type="text" placeholder="班级名称" class="inputtext">
             <button>生成邀请码</button>
@@ -28,6 +32,9 @@ const options = [
 const activeBtIndex = ref(0)
 const searchContent = ref('');
 
+const changeIndex = (index) => {
+    activeBtIndex.value = index;
+}
 </script>
   
   
