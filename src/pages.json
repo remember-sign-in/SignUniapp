@@ -56,7 +56,6 @@
 			}
 		}
 	
-	
 		
 	],
 	"tabBar": {
@@ -87,9 +86,9 @@
 				"text": "签到记录",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
-			},
-		
+			}
 
+	
 
 		]
 	},

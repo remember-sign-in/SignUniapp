@@ -52,16 +52,16 @@ const login = async(form = loginForm.value) =>{
     const getToken = () =>{
         return new Promise((resolve,reject)=>{
                 resolve(3)
-            // wx.login({
-            //     success:async (res)=>{
-            //         code = res.code;
-            //         data = await Login.login(code)
-            //         resolve(data);
-            //     },
-            //     fail: (err)=>{
-            //         reject(err);
-            //     }
-            // })
+            wx.login({
+                success:async (res)=>{
+                    code = res.code;
+                    data = await Login.login(code)
+                    resolve(data);
+                },
+                fail: (err)=>{
+                    reject(err);
+                }
+            })
         })
     }
     await getToken();
@@ -70,6 +70,7 @@ const login = async(form = loginForm.value) =>{
      loginStore.setId(id.trim());
      guard();
 }
+ 
 const register = () =>{
     uni.navigateTo({
         url: '/pages/register/register_13'

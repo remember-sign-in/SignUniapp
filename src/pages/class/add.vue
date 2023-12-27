@@ -9,8 +9,8 @@
         </view>
         <view v-if="activeBtIndex==0" class="mid">
             <view class="smallimg"></view>
-            <input type="text" placeholder="邀请码" class="inputtext">
-            <button>加入班级</button>
+            <input type="text" v-model="inviteCode" placeholder="邀请码" class="inputtext">
+            <button @click="joinClass">加入班级</button>
         </view>
         <view v-else class="mid">
             <view class="smallimg"></view>
@@ -35,8 +35,31 @@ const searchContent = ref('');
 const changeIndex = (index) => {
     activeBtIndex.value = index;
 }
+const addcode = ref({
+    inviteCode: '',
+    id: '1'
+})
+const joinClass =async(form = addcode.value)=>{
+        var data = form.inviteCode;
+        var url = "http://116.62.191.77:80/class/joinClass"; 
+        uni.request({
+        url: url, 
+        method: "POST", 
+        data: data, 
+        header: {
+            "content-type": "application/json" 
+        },
+        success: function (res) {
+            console.log(res.data); 
+        },
+        fail: function (err) {
+            console.log(err);
+        }
+        });
+    }
+
 </script>
-  
+
   
 <style lang="scss">
 .options {

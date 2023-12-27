@@ -51,15 +51,9 @@
 </template>
 
 <script setup>
-
-new view({
-    data:{ myimage: "/static/logo.png",
-        name: '周建辉',
-        myNumber: '1023513515',
-        myclass:"计算机科学与技术6班"
-    }
-})
-
+import { onLoad } from "@dcloudio/uni-app";
+import { ref ,reactive} from "vue";
+import Record from "@/services/class/index";
 
 </script>
 
