@@ -29,6 +29,7 @@
 
     <uni-popup ref="popup" background-color="#fff" @change="change">
       <view style="position: relative">
+        <div class="row2" style="color:black"> 获取你的个人信息</div>
         <uni-card
           is-shadow="false"
           :title="Info.nickName"
@@ -97,6 +98,7 @@ const changeAva = (e) => {
   let val = e.target.value;
   authChoice.value.avatarUrl = val;
 };
+let obj ={}
 const auth = () => {
   wx.login({
     success: async (res) => {
@@ -107,13 +109,12 @@ const auth = () => {
         provider: "weixin",
         withCredentials: true,
         success: ({ userInfo }) => {
-          let obj = {
+          obj = {
             ...data,
             ...userInfo,
           };
           Info.value = obj;
           console.log(Info.value);
-          loginStore.setInfo(obj);
           let userid = loginStore.getUserInfo();
         },
         fail: (error) => {
@@ -127,6 +128,7 @@ const auth = () => {
   });
 };
 const jump = () => {
+    loginStore.setInfo(obj);
   uni.navigateBack({
     delta: 1,
     success(res) {
@@ -159,12 +161,23 @@ onShow(()=>{
   height: 30px;
   font-size: 14px;
 }
+.row2{
+    font-size: 16px;
+    margin-left: 2vw;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    height: 100%;
+    display: flex;
+}
 .row1 {
+    position:relative;
+    width: 60%;
   margin-top: 1vh;
   margin-bottom: 3vh;
   height: 100%;
   display: flex;
-  justify-content: space-around;
+  left:17%;
+  justify-content: space-evenly;
 }
 
 .list {
