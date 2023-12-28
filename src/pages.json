@@ -72,7 +72,7 @@
 			"style": {
 				"navigationBarTitleText": "暂无"
 			}
-		}
+			}
 	
 		
 	],
@@ -110,7 +110,8 @@
 				"text": "学生列表",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
-			}
+			},
+			
 
 
 		]

@@ -5,7 +5,9 @@ export  const useLoginStore = defineStore('LoginStore',{
         token:'123456789',
         userid:-1,
         avaUrl:'',
-        nickName:''
+        nickName:'',
+        number:"202100202151",
+        class:"计算机一班"
     }),
     getters: {
         // getUserInfo:() =>this.userid
@@ -24,12 +26,26 @@ export  const useLoginStore = defineStore('LoginStore',{
             this.token = token;
             uni.setStorageSync('SignInToken',token);
         },
+        removeToken(){
+            this.token='';
+            uni.removeStorageSync('SignInToken');
+        },
         getToken(){
             this.token = uni.getStorageSync('SignInToken');
             if(!this.token){
                 console.log('token不存在');
             }
             return this.token;
+        },
+        getAll(){
+           let temp = {
+                userid:this.userid,
+                avaUrl:this.avaUrl,
+                nickName:this.nickName,
+                number:this.number,
+                class:this.class
+            }
+            return temp;
         },
         setInfo(obj){
             
@@ -39,6 +55,12 @@ export  const useLoginStore = defineStore('LoginStore',{
             this.nickName = obj.nickName;
             
         },
+        logout(){
+            uni.navigateTo({
+                url:'/pages/login/index'
+            })
+            this.removeToken('SignInToken');
+        }
         
     }
 

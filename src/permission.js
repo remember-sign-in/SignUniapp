@@ -1,12 +1,8 @@
-import { useLoginStore } from "./store"
+import  useLoginStore  from "@/store/Login/index"
 const loginStore = useLoginStore();
-
 const config = {
     invoke(args){
-        
         if(!loginStore.getToken()){
-        
-            return;
             uni.showToast({
                 title: '请先登录',
                 icon: 'none'

@@ -111,6 +111,15 @@ const joinString = (str1, str2) => {
 //发起签到
 const startSign = (id) => {
     console.log('not finish');
+    wx.getUserProfile({
+        desc:'dd',
+        success:(res) =>{
+            console.log(res,'->>>>>>>>');
+        },
+        fail:(err)=>{
+            console.log(err)
+        }
+    })
 }
 //跳转班级管理
 const toClass = (id) => {
@@ -126,13 +135,15 @@ const toRecord = (id) =>{
 }
 //Onload
 onLoad(async (options) => {
-    console.log(options,'=>>>>>>>>')
     getCreateList()
     guard();
+    console.log('->>>>')
+   
 })
 onShow(()=>{
     id.value = loginStore.getUserInfo();
     getCreateList();
+    
 })
 
 </script>
