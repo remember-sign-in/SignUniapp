@@ -19,6 +19,10 @@ export default {
     },
     exitClass(id){
         return http.post(`/api/class/exitClass/${id}`)
+    },
+    create_class(params){
+        return http.post('/api/class/create_class',params)
+        // return http.post('http://116.62.191.77:80/class/create_class',params)
     }
 
 };

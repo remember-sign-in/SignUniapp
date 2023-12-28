@@ -60,6 +60,12 @@
 			"style": {
 				"navigationBarTitleText": "暂无"
 			}
+		},
+		{
+			"path": "pages/user/getrealname",
+			"style": {
+				"navigationBarTitleText": "暂无"
+			}
 		}
 	
 		

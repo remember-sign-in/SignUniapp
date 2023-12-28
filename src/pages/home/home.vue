@@ -66,11 +66,13 @@ const cardList = ref([
 const getCreateList = async() =>{
          const res = await home.getCreateList(id.value)
          cardList.value = res.data.items
+         console.log(res.data.items)
 }
 //我加入的
 const getJoinList = async() =>{
         const res = await home.getJoinList(id.value)
      cardList.value = res.data.items
+        console.log(res.data.items)
 }
 
 //逻辑函数 ------------------------
