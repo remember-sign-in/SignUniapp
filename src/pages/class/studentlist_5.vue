@@ -13,11 +13,13 @@
             
         </view>
         <view>
-            <uni-easyinput prefixIcon="search" v-model="searchContent" placeholder="按照姓名/学号搜索学生" @iconClick="iconClick">
+            <uni-easyinput prefixIcon="search" v-model="searchContent" 
+            placeholder="按照姓名/学号搜索学生" 
+            @iconClick="iconClick" @input="filterContent">
             </uni-easyinput>
         </view>
-        <view class="stuList" v-for="(item, index) in studList" :key="index">
-            <uni-card :title="item.stuName" :sub-title="joinString(joinString('班级:', item.stuclass,),joinString('——学号:', item.stunumbers,))" :extra="item.numbers"
+        <view class="stuList" v-for="(item, index) in tempList" :key="index">
+            <uni-card :title="item.name" :sub-title="joinString(joinString('班级:', item.stuclass,),joinString('——学号:', item.stunumbers,))" :extra="item.numbers"
                  @tap="onClick">
                 <button @tap="startSign" class="fuckout">踢出班级</button>
             </uni-card>
@@ -25,48 +27,58 @@
     </view>
 </template>
 <script setup>
+import { onLoad } from "@dcloudio/uni-app";
+import { ref ,reactive} from "vue";
+import Record from "@/services/class/index";
+const searchContent = ref("");
 
-const studList = ([
-    {
-        
-        stuName: '周建辉',
-        stunumbers: '20210020216516',
-        stuclass: '计算机五班1',
-    },
-    {
-        stuName: '周建辉',
-        stunumbers: '20210020216512',
-        stuclass: '计算机五班1',
-    },
-    {
-        stuName: '周建辉',
-        stunumbers: '20210020216512',
-        stuclass: '计算机五班1',
-    },
-    {
-        stuName: '周建辉',
-        stunumbers: '20210020216512',
-        stuclass: '计算机五班1',
-    },
-    {
-        stuName: '周建辉',
-        stunumbers: '20210020216512',
-        stuclass: '计算机五班1',
-    }
-])
-const classlist ={
+const classlist =ref({
     courseName: '软件工程1',
     className: '计算机五班1',
     classtime: '周一 1-2节',
     count: '123',
-    classpicture: '/static/logo.png'
-}
+})
+const studList = ref([
+    {
+        name: '周建辉',
+        stunumbers: '20210020216516',
+        stuclass: '计算机五班1',
+    },
+    {
+        name: '林',
+        stunumbers: '20210020216512',
+        stuclass: '计算机五班1',
+    }
+]);
 
 const joinString = (str1, str2) => {
     if (typeof str1 === 'string' && typeof str2 === 'string') {
         return str1 + str2;
     }
 }
+const tempList = ref([])
+//搜索
+const filterContent = (val) =>{
+    if(val === ""){
+        tempList.value = studList.value
+        return;
+    }
+    const filter = (arr,ori,val) =>{
+        arr.value = ori.value.filter((item)=>{
+            let content= item.name.toString();
+            return content.includes(val.toString());
+        })
+    }
+    filter(tempList,studList,val);
+}
+const getList = async (id) => {
+	const res = await Record.getClassList(id);
+	studList.value = res.data;
+	tempList.value = res.data;
+};
+onLoad((options) => {
+    tempList.value = studList.value
+});
 </script>
 
 <style lang="scss">

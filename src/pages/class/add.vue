@@ -16,7 +16,7 @@
             <view class="smallimg"></view>
             <input type="text" placeholder="课程名称" class="inputtext">
             <input type="text" placeholder="班级名称" class="inputtext">
-            <button>生成邀请码</button>
+            <button @click="creatclass">生成邀请码</button>
         </view>
     </view>
 </template>
@@ -53,7 +53,7 @@ const joinClass =async(form = addcode.value)=>{
             console.log(res.data); 
         },
         fail: function (err) {
-            console.log(err);
+           
         }
         });
     }

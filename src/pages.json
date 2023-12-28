@@ -54,6 +54,12 @@
 			"style": {
 				"navigationBarTitleText": "暂无"
 			}
+		},
+		{
+			"path": "pages/class/studentlist_5",
+			"style": {
+				"navigationBarTitleText": "暂无"
+			}
 		}
 	
 		
@@ -86,9 +92,14 @@
 				"text": "签到记录",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
+			},
+			{
+				"pagePath": "pages/class/studentlist_5",
+				"text": "学生列表",
+				"selectedIconPath": "static/user_selected.png",
+				"iconPath": "static/user_default.png"
 			}
 
-	
 
 		]
 	},

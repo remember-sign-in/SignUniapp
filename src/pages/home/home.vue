@@ -57,20 +57,6 @@ const cardList = ref([
         numbers: '40人',
         joinCode: '123',
         id:"12"
-    },
-    {
-        courseName: '软件工程2',
-        className: '计算机五班2',
-        numbers: '40人',
-        code: '123',
-        id:"12"
-    },
-    {
-        courseName: '软件工程2',
-        className: '计算机五班2',
-        numbers: '40人',
-        code: '123',
-        id:"12"
     }
 ])
 
