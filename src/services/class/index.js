@@ -19,6 +19,9 @@ export default {
     },
     exitClass(id){
         return http.post(`/api/class/exitClass/${id}`)
+    },
+    createClass(params){
+        return http.post(`/api/class/create_class`,params) 
     }
 
 };
