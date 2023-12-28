@@ -7,15 +7,21 @@
 	  },
 	"pages": [
 		{
+			"path": "pages/home/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
 			"path": "pages/class/add",
 			"style": {
 				"navigationBarTitleText": "发起签到"
 			}
 		},
 		{
-			"path": "pages/home/home",
+			"path": "pages/class/index",
 			"style": {
-				"navigationBarTitleText": "登录"
+				"navigationBarTitleText": "发起签到"
 			}
 		},
 		{
@@ -63,7 +69,7 @@
 		"list": [
 			
 			{
-				"pagePath": "pages/home/home",
+				"pagePath": "pages/home/index",
 
 				"text": "首页",
 				"selectedIconPath": "static/home_selected.png",

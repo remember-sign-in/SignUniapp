@@ -32,6 +32,8 @@ import { ref, } from 'vue';
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import home from '@/services/home/index'
 import guard from '@/permission.js'
+import  useLoginStore from "@/store/Login/index";
+const loginStore = useLoginStore();
 //const let 
 const options = [
     { name: '我创建的' },
@@ -123,9 +125,14 @@ const toRecord = (id) =>{
     })
 }
 //Onload
-onLoad(async () => {
-    guard()
+onLoad(async (options) => {
+    console.log(options,'=>>>>>>>>')
     getCreateList()
+    guard();
+})
+onShow(()=>{
+    id.value = loginStore.getUserInfo();
+    getCreateList();
 })
 
 </script>

@@ -6,5 +6,6 @@ export default{
     },
     login(code){
         return http.get(`http://116.62.191.77:80/api/JDQD/getOpenid?code=${code}`)
-    }
+    },
+ 
 }    

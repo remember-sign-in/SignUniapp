@@ -3,7 +3,10 @@ const loginStore = useLoginStore();
 
 const config = {
     invoke(args){
+        
         if(!loginStore.getToken()){
+        
+            return;
             uni.showToast({
                 title: '请先登录',
                 icon: 'none'
@@ -17,8 +20,8 @@ const config = {
  const gurad = () =>{
     const token = loginStore.getToken()
     if(!token) {
-        uni.switchTab({
-            url: '/pages/login/index'
+        uni.navigateTo({
+            url:"/pages/login/index"
         })
     }
     else { 
