@@ -37,7 +37,6 @@ const options = [
 ]
 const cardList = ([
     {
-        
         stuName: '周建辉',
         stunumbers: '20210020216516',
         stuclass: '计算机五班1',

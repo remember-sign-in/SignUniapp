@@ -82,7 +82,11 @@ const filterContent = (val) =>{
     filter(tempList,recordList,val);
 }
 //请求
-
+const getRecor2dList = async (id) => {
+	const res = await Record.getRecordList(id);
+	recordList.value = res.data;
+	tempList.value = res.data;
+};
 //
 onLoad((options) => {
     tempList.value = recordList.value

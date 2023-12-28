@@ -57,20 +57,6 @@ const cardList = ref([
         numbers: '40人',
         joinCode: '123',
         id:"12"
-    },
-    {
-        courseName: '软件工程2',
-        className: '计算机五班2',
-        numbers: '40人',
-        code: '123',
-        id:"12"
-    },
-    {
-        courseName: '软件工程2',
-        className: '计算机五班2',
-        numbers: '40人',
-        code: '123',
-        id:"12"
     }
 ])
 
@@ -80,11 +66,13 @@ const cardList = ref([
 const getCreateList = async() =>{
          const res = await home.getCreateList(id.value)
          cardList.value = res.data.items
+         console.log(res.data.items)
 }
 //我加入的
 const getJoinList = async() =>{
         const res = await home.getJoinList(id.value)
      cardList.value = res.data.items
+        console.log(res.data.items)
 }
 
 //逻辑函数 ------------------------
