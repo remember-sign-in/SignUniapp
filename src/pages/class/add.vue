@@ -29,6 +29,7 @@ import Record from "@/services/class/index";
 import home from '@/services/home/index'
 import useLoginStore from "@/store/Login/index";
 const loginStore = useLoginStore();
+let userid = loginStore.getUserInfo();
 const options = [
     { name: '加入班级' },
     { name: '创建班级' },
@@ -41,13 +42,13 @@ const changeIndex = (index) => {
     activeBtIndex.value = index;
 }
 const addcode = ref({
-    id: user,
+    id: userid,
     joinCode: '12344'
     
 })
 
 const createdata = ref({
-    id: user,
+    id: userid,
     class_name: '计算机',
     numbers: 50
 })
