@@ -1,11 +1,11 @@
 <template>
     <view>
         <view class="top">
-            <img src="/static/logo.png" alt="" class="pictrue">
+            <img :src="userInfo.avaUrl" alt="" class="pictrue">
             <view class="data">
-                <view>name</view>
-                <view>myNumber</view>
-                <view>myclass</view>
+                <view>昵称: {{userInfo.nickName}}</view>
+                <view>学号: {{userInfo.number}}</view>
+                <view>班级: {{userInfo.class}}</view>
             </view>
             
             <navigator class="change" url="changedata_14"> </navigator>
@@ -44,16 +44,27 @@
             </view>
         </view>
         <view class="logout">
-            <button>退出登录</button>
+            <button @tap="logout">退出登录</button>
         </view>
 		
     </view>
 </template>
 
 <script setup>
-import { onLoad } from "@dcloudio/uni-app";
+import { onLoad,onShow } from "@dcloudio/uni-app";
 import { ref ,reactive} from "vue";
 import Record from "@/services/class/index";
+import  useLoginStore  from "@/store/Login/index";
+const loginStore = useLoginStore();
+let userInfo = ref({})
+const logout = () =>{
+    loginStore.logout();
+}
+onLoad(()=>{
+    userInfo.value = loginStore.getAll();
+    console.log(userInfo.value)
+   
+})
 
 </script>
 

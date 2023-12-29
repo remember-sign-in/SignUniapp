@@ -28,134 +28,158 @@
             </div> -->
 
     <uni-popup ref="popup" background-color="#fff" @change="change">
-        
-        <view class="con">
-                <view class="list" style="top: 10vh;">
-                <view class="row">
-                    <view >昵称</view>
-                    <switch @change="changeNick" checked />
-                </view>
-                <view class="row">
-                    <view >头像</view>
-                    <switch @change="changeAva" />
-                </view>
-                <view class="row">
-                    <button @tap="auth" style="width: 50%" type="primary" class="text">授权登录</button>
-                </view>
-            </view>
+      <view style="position: relative">
+        <div class="row2" style="color:black"> 获取你的个人信息</div>
+        <uni-card
+          is-shadow="false"
+          :title="Info.nickName"
+          :isFull="true"
+          sub-title="微信个人信息"
+          :thumbnail="Info.avatarUrl"
+        >
+          <div class="row1">
+            <button class="bt" type="default">拒绝</button>
+            <button class="bt" type="primary" @tap="jump">允许</button>
+          </div>
+        </uni-card>
+      </view>
+
+      <view v-show="false" class="con">
+        <view class="list" style="top: 10vh">
+          <view class="row">
+            <view>昵称</view>
+            <switch @change="changeNick" checked />
+          </view>
+          <view class="row">
+            <view>头像</view>
+            <switch @change="changeAva" />
+          </view>
+          <view class="row">
+            <button @tap="jump" style="width: 50%" type="primary" class="text">
+              授权登录
+            </button>
+          </view>
         </view>
+      </view>
     </uni-popup>
   </div>
 </template>
 
 <script setup>
-import { onLoad } from "@dcloudio/uni-app";
+import { onLoad ,onShow} from "@dcloudio/uni-app";
 import { ref } from "vue";
-import  useLoginStore from "@/store/Login/index";
-import Login from '@/services/login/index'
-import guard from '@/permission.js'
+import useLoginStore from "@/store/Login/index";
+import Login from "@/services/login/index";
+import guard from "@/permission.js";
 const loginStore = useLoginStore();
 const popup = ref(null);
-let Info = ref({});
-let authChoice = ref({
-    nickName: true,
-    avatarUrl: true,
-})
-const changeNick = (e) =>{
-    let val = e.target.value;
-    authChoice.value.nickName = val;
-}
-const changeAva = (e) =>{
-    let val = e.target.value;
-    authChoice.value.avatarUrl = val;
-}
-const auth = () =>{
-    wx.login({
-        success: async(res)=>{
-            console.log(res.code)
-            let {data} = await Login.login(res.code)
-            //设置用户id
-            wx.getUserInfo({
-                provider: "weixin",
-                withCredentials: true,
-                success: ({ userInfo}) => {
-                let obj = {
-                    ...data,
-                    ...userInfo
-                }
-                loginStore.setInfo(obj);
-                let userid = loginStore.getUserInfo();
-                uni.navigateBack({
-                    delta:1,
-                })
-    
-                
-            },
-                fail: (error) => {console.log(error)}
-            })
-        },
-        fail:(err) =>{
-            console.log(err)
-        }
-    })
-}
-onLoad(() => {
-    setTimeout(()=>{
-        popup.value.open("bottom");
-    },100)
+let Info = ref({
+  avatarUrl: "/static/logo.png",
+  nickName: "匿名用户",
 });
 
-// import { ref } from 'vue';
-// import guard from '@/permission'
-// import {useLoginStore} from '@/store/Login/index'
-// import { onLoad } from '@dcloudio/uni-app';
-// import  Login from '@/services/login/index'
-
-// const loginStore = useLoginStore()
-// const loginForm = ref({
-//     accout:'',
-//     pwd:'',
-// })
-// const login = async(form = loginForm.value) =>{
-//     let code;
-//     const getToken = () =>{
-//         return new Promise((resolve,reject)=>{
-//                 resolve(3)
-//             wx.login({
-//                 success:async (res)=>{
-//                     code = res.code;
-//                     data = await Login.login(code)
-//                     console.log(data);
-//                     resolve(data);
-//                 },
-//                 fail: (err)=>{
-//                     console.log('失败了')
-//                     reject(err);
-//                 }
-//             })
-//         })
-//     }
-//     await getToken();
-//      const {id,token} = data.data;
-//      loginStore.setToken(token.trim());
-//      loginStore.setId(id.trim());
-//      guard();
-// }
-// const register = () =>{
-//     uni.navigateTo({
-//         url: '/pages/register/register_13'
-//     })
-// }
-// onLoad(()=>{
-//     console.log(Login)
-//     guard();
-// })
+let authChoice = ref({
+  nickName: true,
+  avatarUrl: true,
+});
+const getInfo = () => {
+  wx.getUserInfo({
+    des: "ddd",
+    success: (res) => {
+      console.log(res);
+    },
+  });
+};
+const changeNick = (e) => {
+  let val = e.target.value;
+  authChoice.value.nickName = val;
+};
+const changeAva = (e) => {
+  let val = e.target.value;
+  authChoice.value.avatarUrl = val;
+};
+let obj ={}
+const auth = () => {
+  wx.login({
+    success: async (res) => {
+      console.log(res.code);
+      let { data } = await Login.login(res.code);
+      //设置用户id
+      wx.getUserInfo({
+        provider: "weixin",
+        withCredentials: true,
+        success: ({ userInfo }) => {
+          obj = {
+            ...data,
+            ...userInfo,
+          };
+          Info.value = obj;
+          console.log(Info.value);
+          let userid = loginStore.getUserInfo();
+        },
+        fail: (error) => {
+          console.log(error);
+        },
+      });
+    },
+    fail: (err) => {
+      console.log(err);
+    },
+  });
+};
+const jump = () => {
+    loginStore.setInfo(obj);
+  uni.navigateBack({
+    delta: 1,
+    success(res) {
+      console.log(res);
+    },
+    fail(err) {
+      uni.switchTab({
+        url: "/pages/index/index",
+      });
+    },
+  });
+};
+onLoad(() => {
+  setTimeout(() => {
+    popup.value.open("bottom");
+  }, 100);
+  auth();
+});
+onShow(()=>{
+    auth()
+}) 
 </script>
 <style lang="scss">
-.con{
-    height: 40vh;
-
+.bt {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 30px;
+  font-size: 14px;
 }
+.row2{
+    font-size: 16px;
+    margin-left: 2vw;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    height: 100%;
+    display: flex;
+}
+.row1 {
+    position:relative;
+    width: 60%;
+  margin-top: 1vh;
+  margin-bottom: 3vh;
+  height: 100%;
+  display: flex;
+  left:17%;
+  justify-content: space-evenly;
+}
+
 .list {
   display: flex;
   flex-direction: column;
