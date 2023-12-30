@@ -5,15 +5,15 @@
             <img src="/static/logo.png" alt="" class="pictrue">
             
             <view class="cardList">
-                <view>课程名：{{ classInfo.name }}</view>
-                <view>班级：{{ classInfo.classRange }}</view>
-                <view>上课时间：{{ classInfo.day }}</view>
-                <view>人数：{{ classInfo.total }}</view>
-                <view>{{ classInfo.range }}</view>
+                <view class="fontStyle">课程名：{{ classInfo.name }}</view>
+                <view class="fontStyle">班级：{{ classInfo.classRange }}</view>
+                <view class="fontStyle">上课时间：{{ classInfo.day }}</view>
+                <view class="fontStyle">人数：{{ classInfo.total }}</view>
+                <view class="fontStyle">{{ classInfo.range }}</view>
             </view>
             
         </view>
-        <view>
+        <view class="bar">
             <uni-easyinput prefixIcon="search" v-model="searchContent" 
             placeholder="按照姓名/学号搜索学生" 
             @iconClick="iconClick" @input="filterContent">
@@ -94,15 +94,15 @@ onLoad((options) => {
 </script>
 
 <style lang="scss">
-
+$bar-width: 80%;
 .top{
-    height:80px;
-    width: 100%;
-    background-color:  rgb(191, 209, 243);
-    // 行排列
-    display: flex;
-    flex-direction: row;
-    
+    margin-bottom: 20px;
+	position: relative;
+	width: 100%;
+	height: 15vh;
+	background: white;
+	display: flex;
+	justify-content: space-between;
     .pictrue{
         height: 60px;
         width:60px;
@@ -118,18 +118,34 @@ onLoad((options) => {
         justify-content: space-around;
     }
     .cardList{
+        padding-left: 20px;
+        flex: 1;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
-        font-size: small;
-        margin-left: 10px;
-    }
+        align-items: flex-start;
+        justify-content: center;
+        }
+}
+.bar{
+    max-height: 20%;
+    width: $bar-width;
+    position: relative;
+    background: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    left: calc(50% - #{$bar-width} / 2);
 }
 .fuckout{
     background-color: rgb(214, 223, 247);
     &:active{
         background-color: rgb(191, 209, 243);
     }
+}
+.fontStyle {
+	padding: 4px;
+	font-weight: bolder;
+	font-size: small;
 }
 </style>
 
