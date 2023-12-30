@@ -63,6 +63,7 @@ const logout = () =>{
 onLoad(()=>{
 
     userInfo.value = loginStore.getAll();
+    console.log('userinfo',userInfo.value,);
 })
 onShow(()=>{
     userInfo.value = loginStore.getAll();

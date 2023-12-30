@@ -80,9 +80,12 @@ const joinClass = async (form = addcode.value) => {
     icon: "none",
   });
   if (data.info !== "加入班级失败") {
-    uni.switchTab({
-      url: `/pages/home/index`,
-    });
+    setTimeout(()=>{
+
+      uni.switchTab({
+        url: `/pages/home/index`,
+      });
+    },1000)
     
   }
 };

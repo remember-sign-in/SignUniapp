@@ -67,11 +67,13 @@
 
 <script setup>
 import { onLoad ,onShow} from "@dcloudio/uni-app";
-import { ref } from "vue";
+import { ref ,onMounted} from "vue";
 import useLoginStore from "@/store/Login/index";
 import Login from "@/services/login/index";
+import guard from "@/permission";
 const loginStore = useLoginStore();
 const popup = ref(null);
+let status = false
 let Info = ref({
   avatarUrl: "/static/logo.png",
   nickName: "匿名用户",
@@ -115,7 +117,7 @@ const auth = () => {
           Info.value = obj;
           console.log(Info.value);
           let userid = loginStore.getUserid();
-          
+          status = true;
         },
         fail: (error) => {
           console.log(error);
@@ -128,6 +130,7 @@ const auth = () => {
   });
 };
 const jump = () => {
+  if(!status) return;
   console.log(obj);
     loginStore.setInfo(obj);
     setTimeout(()=>{
@@ -138,19 +141,20 @@ const jump = () => {
         },
         fail(err) {
           uni.switchTab({
-            url: "/pages/index/index",
+            url: "/pages/home/index",
           });
         },
       },100)
   });
 };
-onLoad(() => {
-  setTimeout(() => {
-    popup.value.open("bottom");
-  }, 100);
+onMounted(() => {
+  console.log('login Page')
+  // guard()
   auth();
+  popup.value.open("bottom");
 });
 onShow(()=>{
+  status = false;
     auth()
 }) 
 </script>

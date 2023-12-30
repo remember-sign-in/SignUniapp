@@ -39,9 +39,9 @@ export  const useLoginStore = defineStore('LoginStore',{
             this.class = clas;
             uni.setStorageSync('class',clas);
         },
-        removeToken(){
-            this.token='';
-            uni.removeStorageSync('SignInToken');
+        removeStorage(name){
+            this[name]='';
+            uni.removeStorageSync(name);
         },
         getUserid(){
             this.userid = uni.getStorageSync('userid');
@@ -51,18 +51,18 @@ export  const useLoginStore = defineStore('LoginStore',{
             return this.userid;
         },
         getToken(){
-            this.token = uni.getStorageSync('SignInToken');
+            this.token =  uni.getStorageSync('SignInToken');
             if(!this.token){
                 console.log('token不存在');
             }
             return this.token;
         },
-        getAll(){
+         getAll(){
             this.userid = uni.getStorageSync('userid');
             this.token = uni.getStorageSync('SignInToken');
             this.avaUrl = uni.getStorageSync('avaUrl');
             this.nickName = uni.getStorageSync('nickName');
-            this.class = uni.getStorageSync('class');
+            this.class =  uni.getStorageSync('class');
            let temp = {
                 userid:this.userid,
                 avaUrl:this.avaUrl,
@@ -82,11 +82,19 @@ export  const useLoginStore = defineStore('LoginStore',{
             // this.nickName = obj.nickName;
             
         },
-        logout(){
-            uni.navigateTo({
-                url:'/pages/login/index'
-            })
-            this.removeToken('SignInToken');
+         logout(){
+            this.removeStorage('SignInToken');
+            this.removeStorage('userid');
+            this.removeStorage('avaUrl');
+            this.removeStorage('nickName');
+            this.removeStorage('class');
+            this.removeStorage('number');
+            setTimeout(()=>{
+
+                uni.navigateTo({
+                    url:'/pages/login/index'
+                })
+            },100)
         }
         
     }

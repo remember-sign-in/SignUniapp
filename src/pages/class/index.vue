@@ -96,7 +96,7 @@ onLoad((options) => {
 <style lang="scss">
 
 .top{
-    height:80px;
+    height:100px;
     width: 100%;
     background-color:  rgb(191, 209, 243);
     // 行排列

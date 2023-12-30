@@ -10,8 +10,8 @@
       >
       </uni-easyinput>
     </view>
-    <view class="options">
-      <view v-for="(item, index) in options">
+    <view class="option">
+      <view v-for="(item, index) in option">
         <button
           @tap="changeIndex(index)"
           :class="index === activeBtIndex ? 'active' : ''"
@@ -20,7 +20,12 @@
         </button>
       </view>
     </view>
-    <view v-if="tempList!=='null'" class="cardList" v-for="(item, index) in tempList" :key="index">
+    <view
+      v-if="tempList !== 'null'"
+      class="cardList"
+      v-for="(item, index) in tempList"
+      :key="index"
+    >
       <uni-card
         :title="item.name"
         :sub-title="'邀请码:' + item.joinCode"
@@ -31,20 +36,20 @@
           ><span style="width: 10%"></span>
           <view class="subFun">
             <button
-              v-show="options[activeBtIndex].name === '我创建的'"
-              @tap="startSign(id,item.id)"
+              v-show="option[activeBtIndex].name === '我创建的'"
+              @tap="startSign(id, item.id)"
             >
               发起签到
             </button>
             <button @tap="toRecord(item.id)">签到记录</button>
             <button
-              v-show="options[activeBtIndex].name === '我创建的'"
+              v-show="option[activeBtIndex].name === '我创建的'"
               @tap="toClass(item.id)"
             >
               班级管理
             </button>
             <button
-              v-show="options[activeBtIndex].name === '我加入的'"
+              v-show="option[activeBtIndex].name === '我加入的'"
               @tap="toClass(item.id)"
             >
               进行签到
@@ -53,9 +58,22 @@
         </view>
       </uni-card>
     </view>
-    <view v-else class="center">
-        暂无班级
-    </view>
+    <!-- 全局定位 -->
+    <view v-else class="center"> 暂无班级 </view>
+    <!-- 签到设置弹框 -->
+    <uni-popup ref="inputDialog" type="dialog">
+      <uni-popup-dialog
+        style="position: relative; top: 30%"
+        ref="inputClose"
+        mode="input"
+        title="签到持续时间(分钟)"
+        v-model="duration"
+        placeholder="签到时间"
+        @confirm="signConfirm"
+      >
+        <uni-number-box v-model="duration" @change="changeDuration" />
+      </uni-popup-dialog>
+    </uni-popup>
   </view>
 </template>
 
@@ -67,10 +85,13 @@ import guard from "@/permission.js";
 import useLoginStore from "@/store/Login/index";
 const loginStore = useLoginStore();
 //const let
-const options = [{ name: "我加入的" }, { name: "我创建的" }];
+const option = [{ name: "我加入的" }, { name: "我创建的" }];
 
 //ref reactive
-const id = ref(-1);//用户id
+const currentClass = ref(-1)
+const duration = ref(2)
+const inputDialog = ref(null);
+const id = ref(-1); //用户id
 const activeBtIndex = ref(0);
 const searchContent = ref("");
 const tempList = ref([]);
@@ -108,10 +129,14 @@ const getJoinList = async () => {
 
 //逻辑函数 ------------------------
 //
+const changeDuration = (val) =>{
+  duration.value = val
+}
 const changeIndex = (index) => {
   activeBtIndex.value = index;
   if (index === 0) {
     getJoinList();
+    
   } else {
     getCreateList();
   }
@@ -137,12 +162,19 @@ const joinString = (str1, str2) => {
   }
 };
 //发起签到
-const startSign = (userid,classid) => {
-  console.log(userid,classid)
-
+const startSign = (userid, classid) => {
+  inputDialog.value.open();
+  currentClass.value = classid;
 };
+const signConfirm = () =>{
+  uni.navigateTo({
+    url: `/pages/sign/index?duration=${duration.value}&classid=${currentClass.value}`,
+  });
+  
+}
 //跳转班级管理
 const toClass = (id) => {
+  console.log(id);
   uni.navigateTo({
     url: `/pages/class/index?id=${id}`,
   });
@@ -155,25 +187,40 @@ const toRecord = (id) => {
 };
 //Onload
 onLoad(async (options) => {
+  console.log(option[activeBtIndex.value],'lalala')
   id.value = loginStore.getUserid();
-  if(options[activeBtIndex.value]==='我加入的') getJoinList();
-  else getCreateList();
-  guard();
-});
-onShow(async (options) => {
+  if (
+    !option[activeBtIndex.value] ||
+    option[activeBtIndex.value].name === "我加入的"
+    )
+    getJoinList();
+    else getCreateList();
+  });
+  onShow(async (options) => {
   id.value = loginStore.getUserid();
-  if(options[activeBtIndex.value]==='我加入的') getJoinList();
+  console.log();
+  if (
+    !option[activeBtIndex.value]  ||
+    option[activeBtIndex.value].name === "我加入的"
+  )
+    getJoinList();
   else getCreateList();
 });
 </script>
 
 <style lang="scss">
-.center{
-    display: flex;
-    height: 80vh;
-    justify-content: center;
-    align-items: center;
-
+.dialog-box {
+  padding: 10px;
+}
+.dialog-text {
+  font-size: 14px;
+  color: #333;
+}
+.center {
+  display: flex;
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
 }
 .sub-Container {
   display: flex;
@@ -191,7 +238,7 @@ onShow(async (options) => {
   }
 }
 
-.options {
+.option {
   display: flex;
   flex-direction: row;
 
