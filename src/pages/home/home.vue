@@ -2,7 +2,7 @@
 <template>
     <view>
         <view>
-            <uni-easyinput prefixIcon="search" v-model="searchContent" placeholder="啦啦啦" @iconClick="iconClick">
+            <uni-easyinput prefixIcon="search" v-model="searchContent" placeholder="啦啦啦" @iconClick="iconClick" @input="search">
             </uni-easyinput>
         </view>
         <view class="options">
@@ -12,7 +12,7 @@
                 </button>
             </view>
         </view>
-    <view  class="cardList" v-for="(item, index) in cardList" :key="index">
+    <view  class="cardList" v-for="(item, index) in tempList" :key="index">
         <uni-card :title="item.className" :sub-title="joinString('课程名:', item.courseName)" :extra="item.numbers"
             thumbnail="/static/logo.png" @tap="onClick">
             <view class="sub-Container">邀请码:{{ item.code }}
@@ -43,6 +43,7 @@ const options = [
 const id = ref(1);
 const activeBtIndex = ref(0)
 const searchContent = ref('');
+const tempList = ref([])
 const cardList = ref([
     {
         index:1,
@@ -59,20 +60,33 @@ const cardList = ref([
         id:"12"
     }
 ])
-
+// 搜索
+const search = (val) =>{
+    if(val === ""){
+        tempList.value = cardList.value
+        return;
+    }
+    const filter = (arr,ori,val) =>{
+        arr.value = ori.value.filter(item=>{
+            let content = item.name.toString();
+            return content.includes(val);
+        })
+    }
+    filter(tempList,cardList,val);
+}
 
 //请求处理 ------------------------
 //我创建的
 const getCreateList = async() =>{
          const res = await home.getCreateList(id.value)
          cardList.value = res.data.items
-         console.log(res.data.items)
+         tempList.value = res.data.items;
 }
 //我加入的
 const getJoinList = async() =>{
         const res = await home.getJoinList(id.value)
-     cardList.value = res.data.items
-        console.log(res.data.items)
+        cardList.value = res.data.items
+        tempList.value = res.data.items;
 }
 
 //逻辑函数 ------------------------
@@ -86,7 +100,6 @@ const changeIndex = (index) => {
          getJoinList()
      }
 }
-
 //凭借字符串
 const joinString = (str1, str2) => {
     if (typeof str1 === 'string' && typeof str2 === 'string') {

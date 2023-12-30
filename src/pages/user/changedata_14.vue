@@ -1,5 +1,4 @@
 <template>
-    <!-- 发起签到（还没点开始签到） -->
     <view class="changedata">
         <view class="top">
             

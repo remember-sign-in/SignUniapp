@@ -189,7 +189,7 @@ onShow(()=>{
   justify-content: center;
   align-items: center;
   position: relative;
-  height: fit-content;
+  height: 100px;
   width: 100vw;
   .row {
     padding: 15px;

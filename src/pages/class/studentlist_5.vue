@@ -5,10 +5,11 @@
             <img src="/static/logo.png" alt="" class="pictrue">
             
             <view class="cardList">
-                <view>课程名：{{ classlist.courseName }}</view>
-                <view>班级：{{ classlist.className }}</view>
-                <view>上课时间：{{ classlist.classtime }}</view>
-                <view>人数：{{ classlist.count }}</view>
+                <view>课程名：{{ classInfo.name }}</view>
+                <view>班级：{{ classInfo.classRange }}</view>
+                <view>上课时间：{{ classInfo.day }}</view>
+                <view>人数：{{ classInfo.total }}</view>
+                <view>{{ classInfo.range }}</view>
             </view>
             
         </view>
@@ -19,35 +20,36 @@
             </uni-easyinput>
         </view>
         <view class="stuList" v-for="(item, index) in tempList" :key="index">
-            <uni-card :title="item.name" :sub-title="joinString(joinString('班级:', item.stuclass,),joinString('——学号:', item.stunumbers,))" :extra="item.numbers"
+            <uni-card :title="item.name" :sub-title="joinString(joinString('班级:', item.gov_class,),joinString('——学号:', item.id,))" :extra="item.numbers"
                  @tap="onClick">
-                <button @tap="startSign" class="fuckout">踢出班级</button>
+                <button @tap="kickCLass(item.id)" class="fuckout" >踢出班级</button>
             </uni-card>
         </view>
     </view>
 </template>
 <script setup>
 import { onLoad } from "@dcloudio/uni-app";
-import { ref ,reactive} from "vue";
-import Record from "@/services/class/index";
+import { ref } from "vue";
+import Class from '@/services/class/index'
 const searchContent = ref("");
 
-const classlist =ref({
-    courseName: '软件工程1',
-    className: '计算机五班1',
-    classtime: '周一 1-2节',
-    count: '123',
-})
+const classInfo = ref({
+	name: "操作系统",
+	classRange: "五到六班",
+	range: "1-18周",
+	day: "周五",
+    total:30
+});
 const studList = ref([
     {
         name: '周建辉',
-        stunumbers: '20210020216516',
-        stuclass: '计算机五班1',
+        id: '20210020216516',
+        gov_class: '计算机五班1',
     },
     {
         name: '林',
-        stunumbers: '20210020216512',
-        stuclass: '计算机五班1',
+        id: '20210020216512',
+        gov_class: '计算机五班1',
     }
 ]);
 
@@ -72,12 +74,22 @@ const filterContent = (val) =>{
     filter(tempList,studList,val);
 }
 const getList = async (id) => {
-	const res = await Record.getClassList(id);
+	const res =  await Class.getClassList(id)
+    
 	studList.value = res.data;
 	tempList.value = res.data;
 };
+const getClassInfo = async(id)=>{
+    const res = await Class.getClassInfo(id);
+    classInfo.value = res.data
+}
+const kickCLass = async(id) =>{
+    Class.kickCLass(id)
+}
 onLoad((options) => {
     tempList.value = studList.value
+    getClassInfo(options.id);
+    getList(options.id);
 });
 </script>
 
