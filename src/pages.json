@@ -73,7 +73,6 @@
 				"navigationBarTitleText": "暂无"
 			}
 		}
-	
 		
 	],
 	"tabBar": {
@@ -104,9 +103,14 @@
 				"text": "签到记录",
 				"selectedIconPath": "static/user_selected.png",
 				"iconPath": "static/user_default.png"
+			},
+			{
+				"pagePath": "pages/class/index",
+				"text": "签到记录",
+				"selectedIconPath": "static/user_selected.png",
+				"iconPath": "static/user_default.png"
 			}
-			
-
+		
 		]
 	},
 	"globalStyle": {
