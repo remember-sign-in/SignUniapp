@@ -86,7 +86,6 @@ const changeIndex = (index) => {
          getJoinList()
      }
 }
-
 //凭借字符串
 const joinString = (str1, str2) => {
     if (typeof str1 === 'string' && typeof str2 === 'string') {
