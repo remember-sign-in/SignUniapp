@@ -5,7 +5,7 @@
             <view class="data">
                 <view>昵称: {{userInfo.nickName}}</view>
                 <view>学号: {{userInfo.number}}</view>
-                <view>班级: {{userInfo.class}}</view>
+                <view >班级: {{userInfo.class||'暂无'}}</view>
             </view>
             
             <navigator class="change" url="changedata_14"> </navigator>
@@ -61,9 +61,12 @@ const logout = () =>{
     loginStore.logout();
 }
 onLoad(()=>{
+
     userInfo.value = loginStore.getAll();
-    console.log(userInfo.value)
-   
+})
+onShow(()=>{
+    userInfo.value = loginStore.getAll();
+    
 })
 
 </script>

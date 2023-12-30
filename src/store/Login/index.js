@@ -21,14 +21,34 @@ export  const useLoginStore = defineStore('LoginStore',{
         },
         setId(id){
             this.userid = id;
+            uni.setStorageSync('userid',id);
         },
         setToken(token){
             this.token = token;
             uni.setStorageSync('SignInToken',token);
         },
+        setAvaUrl(url){
+            this.avaUrl = url;
+            uni.setStorageSync('avaUrl',url);
+        },
+        setNickname(name){
+            this.nickName = name;
+            uni.setStorageSync('nickName',name);
+        },
+        setClass(clas){
+            this.class = clas;
+            uni.setStorageSync('class',clas);
+        },
         removeToken(){
             this.token='';
             uni.removeStorageSync('SignInToken');
+        },
+        getUserid(){
+            this.userid = uni.getStorageSync('userid');
+            if(this.userid===-1){
+                console.log('token不存在');
+            }
+            return this.userid;
         },
         getToken(){
             this.token = uni.getStorageSync('SignInToken');
@@ -38,6 +58,11 @@ export  const useLoginStore = defineStore('LoginStore',{
             return this.token;
         },
         getAll(){
+            this.userid = uni.getStorageSync('userid');
+            this.token = uni.getStorageSync('SignInToken');
+            this.avaUrl = uni.getStorageSync('avaUrl');
+            this.nickName = uni.getStorageSync('nickName');
+            this.class = uni.getStorageSync('class');
            let temp = {
                 userid:this.userid,
                 avaUrl:this.avaUrl,
@@ -45,14 +70,16 @@ export  const useLoginStore = defineStore('LoginStore',{
                 number:this.number,
                 class:this.class
             }
+            console.log(temp,'allInfo');
             return temp;
         },
         setInfo(obj){
-            
             this.setToken(obj.token);
             this.setId(obj.id);
-            this.avaUrl = obj.avatarUrl;
-            this.nickName = obj.nickName;
+            this.setAvaUrl(obj.avatarUrl);
+            this.setNickname(obj.nickName);
+            // this.avaUrl = obj.avatarUrl;
+            // this.nickName = obj.nickName;
             
         },
         logout(){

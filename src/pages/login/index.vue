@@ -70,7 +70,6 @@ import { onLoad ,onShow} from "@dcloudio/uni-app";
 import { ref } from "vue";
 import useLoginStore from "@/store/Login/index";
 import Login from "@/services/login/index";
-import guard from "@/permission.js";
 const loginStore = useLoginStore();
 const popup = ref(null);
 let Info = ref({
@@ -115,7 +114,8 @@ const auth = () => {
           };
           Info.value = obj;
           console.log(Info.value);
-          let userid = loginStore.getUserInfo();
+          let userid = loginStore.getUserid();
+          
         },
         fail: (error) => {
           console.log(error);
@@ -128,17 +128,20 @@ const auth = () => {
   });
 };
 const jump = () => {
+  console.log(obj);
     loginStore.setInfo(obj);
-  uni.navigateBack({
-    delta: 1,
-    success(res) {
-      console.log(res);
-    },
-    fail(err) {
-      uni.switchTab({
-        url: "/pages/index/index",
-      });
-    },
+    setTimeout(()=>{
+      uni.navigateBack({
+        delta: 1,
+        success(res) {
+          console.log(res);
+        },
+        fail(err) {
+          uni.switchTab({
+            url: "/pages/index/index",
+          });
+        },
+      },100)
   });
 };
 onLoad(() => {
