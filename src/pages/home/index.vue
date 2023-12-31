@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view>
+    <view class="bar">
       <uni-easyinput
         prefixIcon="search"
         @input="search"
@@ -247,8 +247,19 @@ onLoad(async (options) => {
     font-size: 80%;
   }
 }
+$bar-width: 80%;
 
-.option {
+.bar{
+    max-height: 20%;
+    width: $bar-width;
+    position: relative;
+    background: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    left: calc(50% - #{$bar-width} / 2);
+}
+.options {
   display: flex;
   flex-direction: row;
 

@@ -1,17 +1,17 @@
 
 <template>
-    <view>
-        <view>
-            <uni-easyinput prefixIcon="search" v-model="searchContent" placeholder="啦啦啦" @iconClick="iconClick" @input="search">
-            </uni-easyinput>
+  
+    <view class="bar">
+        <uni-easyinput  prefixIcon="search" v-model="searchContent" placeholder="啦啦啦" @iconClick="iconClick" @input="search">
+        </uni-easyinput>
+    </view>
+    <view class="options">
+        <view v-for="(item, index) in options">
+            <button @tap="changeIndex(index)" :class="index === activeBtIndex ? 'active' : ''">
+                {{ item.name }}
+            </button>
         </view>
-        <view class="options">
-            <view v-for="(item, index) in options">
-                <button @tap="changeIndex(index)" :class="index === activeBtIndex ? 'active' : ''">
-                    {{ item.name }}
-                </button>
-            </view>
-        </view>
+    </view>
     <view  class="cardList" v-for="(item, index) in tempList" :key="index">
         <uni-card :title="item.className" :sub-title="joinString('课程名:', item.courseName)" :extra="item.numbers"
             thumbnail="/static/logo.png" @tap="onClick">
@@ -23,7 +23,7 @@
             </view>
         </uni-card>
     </view> 
-    </view>
+   
     
 </template>
    
@@ -124,6 +124,7 @@ onLoad(async () => {
   
   
 <style lang="scss">
+$bar-width: 80%;
 .sub-Container {
     display: flex;
     justify-content: space-between;
@@ -149,5 +150,15 @@ onLoad(async () => {
     .active {
         background: lightblue;
     }
+}
+.bar{
+    max-height: 20%;
+    width: $bar-width;
+    position: relative;
+    background: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    left: calc(50% - #{$bar-width} / 2);
 }
 </style>
