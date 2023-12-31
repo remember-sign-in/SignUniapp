@@ -87,6 +87,9 @@ const kickCLass = async(id) =>{
     Class.kickCLass(id)
 }
 onLoad((options) => {
+    setInterval(()=>{
+        console.log('test')
+    },1000)
     tempList.value = studList.value
     getClassInfo(options.id);
     getList(options.id);

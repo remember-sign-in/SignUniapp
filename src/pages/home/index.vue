@@ -37,20 +37,20 @@
           <view class="subFun">
             <button
               v-show="option[activeBtIndex].name === '我创建的'"
-              @tap="startSign(id, item.id)"
+              @tap="startSign(id, item.index)"
             >
               发起签到
             </button>
             <button @tap="toRecord(item.id)">签到记录</button>
             <button
               v-show="option[activeBtIndex].name === '我创建的'"
-              @tap="toClass(item.id)"
+              @tap="toClass(item.index)"
             >
               班级管理
             </button>
             <button
               v-show="option[activeBtIndex].name === '我加入的'"
-              @tap="toClass(item.id)"
+              @tap="sign(item.index)"
             >
               进行签到
             </button>
@@ -63,7 +63,7 @@
     <!-- 签到设置弹框 -->
     <uni-popup ref="inputDialog" type="dialog">
       <uni-popup-dialog
-        style="position: relative; top: 30%"
+        style="position: relative; top: 20%"
         ref="inputClose"
         mode="input"
         title="签到持续时间(分钟)"
@@ -82,6 +82,7 @@ import { ref } from "vue";
 import { onLoad, onShow } from "@dcloudio/uni-app";
 import home from "@/services/home/index";
 import guard from "@/permission.js";
+import User from '@/services/user/index'
 import useLoginStore from "@/store/Login/index";
 const loginStore = useLoginStore();
 //const let
@@ -128,7 +129,16 @@ const getJoinList = async () => {
 };
 
 //逻辑函数 ------------------------
-//
+//进行签到,还缺第三个参数
+const sign = () =>{
+
+}
+// const sign = () =>{
+//   User.sign({
+//     id:id.value,
+//     checkin_id:
+//   })
+// }
 const changeDuration = (val) =>{
   duration.value = val
 }
@@ -208,7 +218,7 @@ onLoad(async (options) => {
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .dialog-box {
   padding: 10px;
 }
@@ -242,15 +252,16 @@ onLoad(async (options) => {
   display: flex;
   flex-direction: row;
 
-  view {
+ &> view {
     flex: 1;
+    &> button {
+      border-radius: 0;
+      background: transparent;
+    }
   }
 
   .active {
     background: lightblue;
-  }
-  & > button {
-    background: transparent;
   }
 }
 </style>

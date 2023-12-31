@@ -5,13 +5,14 @@
       <uni-countdown
         :font-size="20"
         :show-day="false"
-        :start="start"
+        :start="true"
         @timeup="timeup"
         :hour="0"
         :minute="time.minute"
         :second="0"
       />
     </view>
+    <view>签到码:{{}}</view>
     <div class="info">
       <div class="fontStyle">总人数: {{ indexInfo.total }}人</div>
       <div class="fontStyle">已签到: {{ indexInfo.signed }}人</div>
@@ -27,6 +28,16 @@
       @input="filterContent"
     >
     </uni-easyinput>
+  </view>
+  <view class="option">
+    <view v-for="(item, index) in options">
+      <button
+        @tap="changeIndex(index)"
+        :class="index === activeBtIndex ? 'active' : ''"
+      >
+        {{ item.name }}
+      </button>
+    </view>
   </view>
   <view class="list" v-for="(item, index) in tempList" :key="index">
     <div
@@ -54,11 +65,16 @@
   </view>
 </template>
 <script setup>
-import { onLoad } from "@dcloudio/uni-app";
+import { onLoad, onShow } from "@dcloudio/uni-app";
 import { ref, reactive } from "vue";
 import Record from "@/services/class/index";
+import Sign from "@/services/record/index";
+import User from "@/services/user/index";
 const searchContent = ref("");
-const start = ref(false);
+const flag = ref(true);
+let signId = ref(-1);
+const options = [{ name: "已签到" }, { name: "未签到" },{name:'缺勤'},{name:'请假'}];
+const activeBtIndex = ref(0);
 const time = ref({
   hour: 0,
   minute: 0,
@@ -75,6 +91,7 @@ const recordList = ref([
     number: "202100202149",
     gov_class: "计算机一班",
     status: "已签到",
+    time: "2023-12-15 15:65:34",
     id: "34",
   },
   {
@@ -82,16 +99,40 @@ const recordList = ref([
     number: "202100202149",
     gov_class: "计算机一班",
     status: "已签到",
+    time: "2023-12-15 15:65:34",
     id: "34",
   },
 ]);
 const tempList = ref([]);
+let timer;
 const timeup = () => {
   uni.showToast({
     title: "时间到",
   });
+  clearInterval(timer);
 };
 
+const updataSign = async (id) => {
+  const { data } = await Sign.getRecordDetail(id);
+  console.log(data);
+  recordList.value = data.items;
+};
+const start = async (classid, time) => {
+  let { data } = await User.startSign({
+    class_id: classid,
+    time: time,
+  });
+  flag.value = false;
+  signId.value = data.message[0]["签到id"];
+  // return;
+  console.log(signId.value);
+  updataSign(signId.value);
+  if(!timer){
+      timer = setInterval(()=>{
+          updataSign(signId.value);
+        },1000)
+    }
+};
 
 //搜索
 const filterContent = (val) => {
@@ -118,10 +159,28 @@ onLoad((option) => {
   console.log(option, "params Form home.vue");
   time.value.minute = parseInt(option.duration);
   tempList.value = recordList.value;
+  start(option.classid, parseInt(option.duration) * 60);
 });
+onShow((option) => {});
 </script>
 <style lang="scss">
 $bar-width: 80%;
+.option{
+    display: flex;
+    width: 100vw;
+    &>view{
+        border-radius: 0;
+        flex:1;
+
+    }
+    &>button{
+        border-radius: 0;
+        background: transparent;
+    }
+}
+.active {
+    background: lightblue;
+  }
 .countDown {
   font-weight: bolder;
   display: flex;
