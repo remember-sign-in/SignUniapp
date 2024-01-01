@@ -5,11 +5,8 @@
             <img src="/static/logo.png" alt="" class="pictrue">
             
             <view class="cardList">
-                <view class="fontStyle">课程名：{{ classInfo.name }}</view>
-                <view class="fontStyle">班级：{{ classInfo.classRange }}</view>
-                <view class="fontStyle">上课时间：{{ classInfo.day }}</view>
+                <view class="fontStyle">班级：{{ classInfo.class_num }}</view>
                 <view class="fontStyle">人数：{{ classInfo.total }}</view>
-                <view class="fontStyle">{{ classInfo.range }}</view>
             </view>
             
         </view>
@@ -20,7 +17,7 @@
             </uni-easyinput>
         </view>
         <view class="stuList" v-for="(item, index) in tempList" :key="index">
-            <uni-card :title="item.name" :sub-title="joinString(joinString('班级:', item.gov_class,),joinString('——学号:', item.id,))" :extra="item.numbers"
+            <uni-card :title="item.name" :sub-title="joinString('班级:', item.gov_class,)" :extra="item.numbers"
                  @tap="onClick">
                 <button @tap="kickCLass(item.id)" class="fuckout" >踢出班级</button>
             </uni-card>
@@ -32,23 +29,22 @@ import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import Class from '@/services/class/index'
 const searchContent = ref("");
-
+const classId = ref(-1)
 const classInfo = ref({
-	name: "操作系统",
-	classRange: "五到六班",
-	range: "1-18周",
-	day: "周五",
-    total:30
+	class_id: "38",
+	class_num: "计算机5班",
+	creator_id: "1",
+    total:"2"
 });
 const studList = ref([
     {
         name: '周建辉',
-        id: '20210020216516',
+        id: '1',
         gov_class: '计算机五班1',
     },
     {
         name: '林',
-        id: '20210020216512',
+        id: '2',
         gov_class: '计算机五班1',
     }
 ]);
@@ -74,23 +70,24 @@ const filterContent = (val) =>{
     filter(tempList,studList,val);
 }
 const getList = async (id) => {
-	const res =  await Class.getClassList(id)
+	const {data} =  await Class.getClassList(id)
     
-	studList.value = res.data;
-	tempList.value = res.data;
+	studList.value = data.class;
+	tempList.value = data.class;
 };
 const getClassInfo = async(id)=>{
     const res = await Class.getClassInfo(id);
     classInfo.value = res.data
 }
-const kickCLass = async(id) =>{
-    Class.kickCLass(id)
+const kickCLass = async(userid,classid=classId.value) =>{
+    const {data} = await Class.kickClass(userid,classid);
+    getList(classId.value);
+    getClassInfo(classId.value)
 }
 onLoad((options) => {
-    setInterval(()=>{
-        console.log('test')
-    },1000)
-    tempList.value = studList.value
+    tempList.value = studList.value;
+    console.log(options.id)
+    classId.value = options.id;
     getClassInfo(options.id);
     getList(options.id);
 });

@@ -1,15 +1,5 @@
 <template>
   <view>
-    <view class="bar">
-      <uni-easyinput
-        prefixIcon="search"
-        @input="search"
-        v-model="searchContent"
-        placeholder="啦啦啦"
-        @iconClick="iconClick"
-      >
-      </uni-easyinput>
-    </view>
     <view class="option">
       <view v-for="(item, index) in option">
         <button
@@ -19,6 +9,16 @@
           {{ item.name }}
         </button>
       </view>
+    </view>
+    <view class="search">
+      <uni-easyinput
+        prefixIcon="search"
+        @input="search"
+        v-model="searchContent"
+        placeholder="啦啦啦"
+        @iconClick="iconClick"
+      >
+      </uni-easyinput>
     </view>
     <view
       v-if="tempList !== 'null'"
@@ -50,9 +50,15 @@
             </button>
             <button
               v-show="option[activeBtIndex].name === '我加入的'"
-              @tap="sign(item.index)"
+              @tap="Confirm(item.index)"
             >
               进行签到
+            </button>
+            <button
+              v-show="option[activeBtIndex].name === '我加入的'"
+              @tap="exitClass(item.index)"
+            >
+              退出班级
             </button>
           </view>
         </view>
@@ -74,6 +80,18 @@
         <uni-number-box v-model="duration" @change="changeDuration" />
       </uni-popup-dialog>
     </uni-popup>
+    <!-- 签到输入弹窗 -->
+    <uni-popup ref="signDialog" type="dialog">
+      <uni-popup-dialog
+        style="position: relative; top: 30%"
+        ref="inputClose"
+        mode="input"
+        title="签到码"
+        @confirm="signUp"
+      >
+      <input placeholder="签到码" v-model="code">
+      </uni-popup-dialog>
+    </uni-popup>
   </view>
 </template>
 
@@ -82,20 +100,24 @@ import { ref } from "vue";
 import { onLoad, onShow } from "@dcloudio/uni-app";
 import home from "@/services/home/index";
 import guard from "@/permission.js";
-import User from '@/services/user/index'
+import User from "@/services/user/index";
+import Class from "@/services/class/index";
 import useLoginStore from "@/store/Login/index";
 const loginStore = useLoginStore();
 //const let
 const option = [{ name: "我加入的" }, { name: "我创建的" }];
 
 //ref reactive
-const currentClass = ref(-1)
-const duration = ref(2)
+const currentClass = ref(-1);
+const duration = ref(2);
 const inputDialog = ref(null);
+const signDialog = ref(null);
 const id = ref(-1); //用户id
 const activeBtIndex = ref(0);
 const searchContent = ref("");
 const tempList = ref([]);
+let classid = ref(-1)
+let code = ref('')
 const cardList = ref([
   {
     index: 1,
@@ -114,39 +136,49 @@ const cardList = ref([
 ]);
 
 //请求处理 ------------------------
+const exitClass = async(classid,userid = id.value) =>{
+  await Class.exitClass(classid,userid)
+  getJoinList()
+}
 //我创建的
 const getCreateList = async () => {
   const res = await home.getCreateList(id.value);
-  cardList.value = res.data.items;
-  tempList.value = res.data.items;
+  cardList.value = res.data.MyClass;
+  tempList.value = res.data.MyClass;
   if (!tempList.value) tempList.value = [];
 };
 //我加入的
 const getJoinList = async () => {
   const res = await home.getJoinList(id.value);
-  cardList.value = res.data.items;
-  tempList.value = res.data.items;
+  cardList.value = res.data.JoinClass;
+  tempList.value = res.data.JoinClass;
 };
 
 //逻辑函数 ------------------------
-//进行签到,还缺第三个参数
-const sign = () =>{
-
+const Confirm = (class_id) =>{
+  classid.value = class_id
+  signDialog.value.open();
 }
-// const sign = () =>{
-//   User.sign({
-//     id:id.value,
-//     checkin_id:
-//   })
-// }
-const changeDuration = (val) =>{
-  duration.value = val
+//进行签到 
+const signUp = async() =>{
+  console.log(code.value,'dffd')
+  let {data} = await User.signUp({
+    id:id.value,
+    class_id:classid.value,
+    code:code.value
+  })
+  uni.showToast({
+    title:data.info.result,
+    icon:'none'
+  })
 }
+const changeDuration = (val) => {
+  duration.value = val;
+};
 const changeIndex = (index) => {
   activeBtIndex.value = index;
   if (index === 0) {
     getJoinList();
-    
   } else {
     getCreateList();
   }
@@ -176,12 +208,11 @@ const startSign = (userid, classid) => {
   inputDialog.value.open();
   currentClass.value = classid;
 };
-const signConfirm = () =>{
+const signConfirm = () => {
   uni.navigateTo({
     url: `/pages/sign/index?duration=${duration.value}&classid=${currentClass.value}`,
   });
-  
-}
+};
 //跳转班级管理
 const toClass = (id) => {
   console.log(id);
@@ -197,20 +228,19 @@ const toRecord = (id) => {
 };
 //Onload
 onLoad(async (options) => {
-  console.log(option[activeBtIndex.value],'lalala')
   id.value = loginStore.getUserid();
   if (
     !option[activeBtIndex.value] ||
     option[activeBtIndex.value].name === "我加入的"
-    )
+  )
     getJoinList();
-    else getCreateList();
-  });
-  onShow(async (options) => {
+  else getCreateList();
+});
+onShow(async (options) => {
   id.value = loginStore.getUserid();
   console.log();
   if (
-    !option[activeBtIndex.value]  ||
+    !option[activeBtIndex.value] ||
     option[activeBtIndex.value].name === "我加入的"
   )
     getJoinList();
@@ -219,6 +249,12 @@ onLoad(async (options) => {
 </script>
 
 <style lang="scss" scoped>
+.search {
+  position: relative;
+  left: 10%;
+  margin-top: 4vh;
+  width: 80%;
+}
 .dialog-box {
   padding: 10px;
 }
@@ -247,25 +283,14 @@ onLoad(async (options) => {
     font-size: 80%;
   }
 }
-$bar-width: 80%;
 
-.bar{
-    max-height: 20%;
-    width: $bar-width;
-    position: relative;
-    background: white;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-radius: 20px;
-    left: calc(50% - #{$bar-width} / 2);
-}
-.options {
+.option {
   display: flex;
   flex-direction: row;
 
- &> view {
+  & > view {
     flex: 1;
-    &> button {
+    & > button {
       border-radius: 0;
       background: transparent;
     }

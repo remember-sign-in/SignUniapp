@@ -17,6 +17,13 @@ class req {
 			data,
 		});
 	}
+	put(url, data) {
+		return api({
+			method: "PUT",
+			url,
+			data,
+		});
+	}
 }
 
 export default req;

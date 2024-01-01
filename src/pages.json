@@ -27,7 +27,7 @@
 		{
 			"path": "pages/class/index",
 			"style": {
-				"navigationBarTitleText": "发起签到"
+				"navigationBarTitleText": "班级管理"
 			}
 		},
 	

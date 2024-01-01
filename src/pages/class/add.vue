@@ -91,9 +91,10 @@ const joinClass = async (form = addcode.value) => {
 };
 const creatclass = async (form = createdata.value) => {
   const { data } = await Record.createClass(createdata.value);
-  createdata.value.code = data.message[0]["邀请码"];
+  
+  createdata.value.code = data.message.joinCode;
   uni.showToast({
-    title: data.message[0]["result"],
+    title: data.message["result"],
     icon: "none",
   });
 };

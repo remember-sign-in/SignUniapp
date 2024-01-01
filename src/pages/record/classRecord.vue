@@ -43,11 +43,13 @@
 	</view>
 </template>
 <script setup>
-import { onLoad } from "@dcloudio/uni-app";
+import { onLoad,onShow } from "@dcloudio/uni-app";
 import { ref, reactive } from "vue";
 import Record from "@/services/record/index";
+import  useLoginStore  from "@/store";
+const loginStore  = useLoginStore()
 const searchContent = ref("");
-
+let userid =ref(-1)
 const indexInfo = ref({
 	total: 30,
 	signed: 20,
@@ -89,13 +91,18 @@ const getList = async(id) =>{
     let res = await Record.getRecordList(id);
     recordList.value = res.data;
     tempList.value = recordList.value;
+	if(res.data.id === '') uni.showToast({
+		title:res.data.info
+	})
 }
 //
 onLoad((options) => {
-    const {id} = options;
-    getList(id);
+	userid.value = loginStore.getUserid();
     
 });
+onShow((options)=>{
+
+})
 </script>
 <style lang="scss">
 $bar-width: 80%;
