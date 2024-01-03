@@ -91,10 +91,10 @@ const joinClass = async (form = addcode.value) => {
 };
 const creatclass = async (form = createdata.value) => {
   const { data } = await Record.createClass(createdata.value);
-  
-  createdata.value.code = data.message.joinCode;
+  console.log(data,'00000000')
+  createdata.value.code = data.info.joinCode;
   uni.showToast({
-    title: data.message["result"],
+    title: data.info["result"],
     icon: "none",
   });
 };

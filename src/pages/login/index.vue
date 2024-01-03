@@ -103,7 +103,7 @@ let obj ={}
 const auth = () => {
   wx.login({
     success: async (res) => {
-      console.log(res.code);
+      console.log(res.code,'code');
       let { data } = await Login.login(res.code);
       //设置用户id
       wx.getUserInfo({

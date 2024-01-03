@@ -158,14 +158,18 @@ const updataSign = async (id) => {
 //     tempList.value = [];
 //     return;
 //   }
-  recordList.value = data;
-  tempList.value = data;
-  indexInfo.value.total = data[0].total;
-  indexInfo.value.signed = data[0].signed;
-  indexInfo.value.unsigned = data[0].unsigned;
-  changeIndex(currentIndex.value);
+  if(data[0].total){
+
+    recordList.value = data;
+    tempList.value = data;
+    indexInfo.value.total = data[0].total;
+    indexInfo.value.signed = data[0].signed;
+    indexInfo.value.unsigned = data[0].unsigned;
+    changeIndex(currentIndex.value);
+  }
 };
 const startSign = async (classid, time) => {
+  console.log(classid,'班级id')
   let { data } = await User.startSign({
     class_id: classid,
     time: time,
