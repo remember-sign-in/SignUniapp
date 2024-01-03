@@ -17,7 +17,7 @@
             </uni-easyinput>
         </view>
         <view class="stuList" v-for="(item, index) in tempList" :key="index">
-            <uni-card :title="item.name" :sub-title="joinString('班级:', item.gov_class,)" :extra="item.numbers"
+            <uni-card :title="joinString('姓名: ',item.name)" :sub-title="joinString('班级:', item.gov_class)" :extra="item.numbers"
                  @tap="onClick">
                 <button @tap="kickCLass(item.id)" class="fuckout" >踢出班级</button>
             </uni-card>
@@ -50,9 +50,9 @@ const studList = ref([
 ]);
 
 const joinString = (str1, str2) => {
-    if (typeof str1 === 'string' && typeof str2 === 'string') {
+    
         return str1 + str2;
-    }
+    
 }
 const tempList = ref([])
 //搜索
@@ -71,7 +71,7 @@ const filterContent = (val) =>{
 }
 const getList = async (id) => {
 	const {data} =  await Class.getClassList(id)
-    
+    console.log(data,'班级list')
 	studList.value = data.class;
 	tempList.value = data.class;
 };

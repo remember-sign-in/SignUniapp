@@ -83,7 +83,7 @@ import { ref ,onMounted} from "vue";
 import useLoginStore from "@/store/Login/index";
 import Login from "@/services/login/index";
 import guard from "@/permission";
-import edit from "@/services/user/index";
+import User from "@/services/user/index";
 const loginStore = useLoginStore();
 const popup = ref(null);
 let status = false
@@ -130,17 +130,13 @@ const auth = () => {
             ...userInfo,
           };
           Info.value = obj;
-          console.log(Info.value);
+          console.log(Info.value,'用户信息');
           let userid = loginStore.getUserid();
           status = true;
         // ---------------------------------我添加的bebin---------------------------------
         // 检查用户是否已经存在
-          const userExists = await checkUserExists(userid);  
           // 如果用户不存在，打开新的弹出窗口
           // if (status&& !userExists ) {
-          if (status) {
-            namePopup.value.open();
-          }
         // ---------------------------------我添加的bebin---------------------------------
         },
         fail: (error) => {
@@ -176,6 +172,7 @@ onMounted(() => {
   // guard()
   auth();
   popup.value.open("bottom");
+  namePopup.value.open();
 });
 onShow(()=>{
   status = false;
@@ -184,23 +181,18 @@ onShow(()=>{
 }) 
 // ---------------------------------我添加的bebin---------------------------------
 
-// 查看用户是否存在
-const checkUserExists =(userid)=>{
-  return true
-}
+
 let name = ref(""); // 用于存储用户输入的姓名
 const namePopup = ref(null); // 引用新的弹出窗口
-const submitName = async () => {
-  // 当用户点击确定按钮时，发送 POST 请求
-  const response = await edit.editUser(userid, name.value)
-  console.log(response);
-  if (response) {
-    // 如果请求成功，关闭弹出窗口
-    namePopup.value.close();
-  } else {
-    // 如果请求失败，处理错误
-    console.error("Failed to submit name");
-  }
+const submitName =  () => {
+  console.log(obj)
+  namePopup.value.close();
+  Info.value.nickName = name.value;
+  User.editInfo({
+    name:Info.value.nickName,
+    id:Info.value.id
+  })
+  
 };
 // ---------------------------------我添加的end---------------------------------
 </script>

@@ -17,9 +17,10 @@ export default{
         return http.post(`http://116.62.191.77:80/user/signUp?id=${params.id}&class_id=${params.class_id}&signIn_number=${params.code}`,params)
     },
     editInfo(params){
-        return http.post("/user/editInfo",params)
+        return http.post(`/user/editInfo?name=${params.name}&id=${params.id}`,params)
     },
     userInfo(id){
         return http.get(`/user/info/${id}`)
     },
+
 }

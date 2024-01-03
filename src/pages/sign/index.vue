@@ -45,7 +45,7 @@
     <view>
       <uni-card  sub-title="454545">
         <template v-slot:title>
-          <view style="font-size: 20px; font-weight: bold; padding: 5px">{{ item.name }}</view>
+          <view style="font-size: 20px; font-weight: bold; padding: 5px">姓名: {{ item.name }}</view>
         </template>
         <view style="font-weight: 600;">
           班级：{{ item.class }}
@@ -54,8 +54,8 @@
           <span  style="font-weight: 600;">
             签到时间：{{ item.time }}
           </span>
-          <span :class="item.status === 1 ? 'signed':'unsigned'"  style="font-weight: 600; cursor:pointer" >
-            {{ item.status === 1 ? "已签到" : "未签到"}}
+          <span :class="item.status == 1 ? 'signed':'unsigned'"  style="font-weight: 600; cursor:pointer" >
+            {{ item.status == 1 ? "已签到" : "未签到"}}
           </span>
         </view>
 			</uni-card>
@@ -85,7 +85,7 @@
   </view>
 </template>
 <script setup>
-import { onLoad, onShow } from "@dcloudio/uni-app";
+import { onLoad, onShow,computed } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import Record from "@/services/class/index";
 import Sign from "@/services/record/index";
@@ -94,6 +94,7 @@ const searchContent = ref("");
 const flag = ref(true);
 let signId = ref(-1);
 let currentIndex = ref(0);
+
 const colorOpt = [
   'lightgreen',
   'darkred'
@@ -149,19 +150,20 @@ const changeIndex = (index) => {
 };
 const updataSign = async (id) => {
   const { data } = await Sign.getRecordDetail(id);
-  console.log(data, "签到list");
-//   if (!data) {
-//     uni.showToast({
-//       title: '暂无签到记录',
-//       icon: "none",
-//     });
-//     tempList.value = [];
-//     return;
-//   }
-  if(data[0].total){
-
-    recordList.value = data;
-    tempList.value = data;
+  //   if (!data) {
+    //     uni.showToast({
+      //       title: '暂无签到记录',
+      //       icon: "none",
+      //     });
+      //     tempList.value = [];
+      //     return;
+      //   }
+      if(data[0].total){
+        
+        recordList.value = data;
+        tempList.value = data;
+        console.log(tempList.value, "tempList");
+        console.log('status',data[0].status)
     indexInfo.value.total = data[0].total;
     indexInfo.value.signed = data[0].signed;
     indexInfo.value.unsigned = data[0].unsigned;
