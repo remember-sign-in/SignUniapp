@@ -18,7 +18,7 @@
         placeholder="邀请码"
         class="inputtext"
       />
-      <button @click="joinClass">加入班级</button>
+      <button @click="joinClass" class="join">加入班级</button>
     </view>
     <view v-else class="mid">
       <view class="smallimg"></view>
@@ -40,7 +40,7 @@
         class="inputtext"
         v-model="createdata.code"
       />
-      <button @click="creatclass">创建班级</button>
+      <button class="createclass" @click="creatclass">创建班级</button>
     </view>
   </view>
 </template>
@@ -118,6 +118,13 @@ onLoad(() => {
   .active {
     background: rgb(191, 209, 243);
   }
+}
+.createclass{
+    width: 50%;
+   
+}
+.join{
+    width: 50%;
 }
 .mid {
   display: flex;

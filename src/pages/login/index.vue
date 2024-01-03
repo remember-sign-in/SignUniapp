@@ -62,6 +62,18 @@
         </view>
       </view>
     </uni-popup>
+     <!-- ---------------------------------我添加的bebin--------------------------------- -->
+    <uni-popup ref="namePopup" background-color="#fff" @change="change">
+    <view class="popup-container">
+      <div class="popup-title">请输入你的姓名</div>
+      <input v-model="name" placeholder="输入姓名" class="popup-input" />
+      <button @tap="submitName" class="popup-button" size="default" type="primary">
+        确定
+      </button>
+    </view>
+    </uni-popup>
+    <!-- ---------------------------------我添加的end--------------------------------- -->
+
   </div>
 </template>
 
@@ -71,11 +83,14 @@ import { ref ,onMounted} from "vue";
 import useLoginStore from "@/store/Login/index";
 import Login from "@/services/login/index";
 import guard from "@/permission";
+import edit from "@/services/user/index";
 const loginStore = useLoginStore();
 const popup = ref(null);
 let status = false
 let Info = ref({
   avatarUrl: "/static/logo.png",
+
+
   nickName: "匿名用户",
 });
 
@@ -109,7 +124,7 @@ const auth = () => {
       wx.getUserInfo({
         provider: "weixin",
         withCredentials: true,
-        success: ({ userInfo }) => {
+        success: async ({ userInfo }) => {
           obj = {
             ...data,
             ...userInfo,
@@ -118,6 +133,15 @@ const auth = () => {
           console.log(Info.value);
           let userid = loginStore.getUserid();
           status = true;
+        // ---------------------------------我添加的bebin---------------------------------
+        // 检查用户是否已经存在
+          const userExists = await checkUserExists(userid);  
+          // 如果用户不存在，打开新的弹出窗口
+          // if (status&& !userExists ) {
+          if (status) {
+            namePopup.value.open();
+          }
+        // ---------------------------------我添加的bebin---------------------------------
         },
         fail: (error) => {
           console.log(error);
@@ -156,7 +180,29 @@ onMounted(() => {
 onShow(()=>{
   status = false;
     auth()
+  
 }) 
+// ---------------------------------我添加的bebin---------------------------------
+
+// 查看用户是否存在
+const checkUserExists =(userid)=>{
+  return true
+}
+let name = ref(""); // 用于存储用户输入的姓名
+const namePopup = ref(null); // 引用新的弹出窗口
+const submitName = async () => {
+  // 当用户点击确定按钮时，发送 POST 请求
+  const response = await edit.editUser(userid, name.value)
+  console.log(response);
+  if (response) {
+    // 如果请求成功，关闭弹出窗口
+    namePopup.value.close();
+  } else {
+    // 如果请求失败，处理错误
+    console.error("Failed to submit name");
+  }
+};
+// ---------------------------------我添加的end---------------------------------
 </script>
 <style lang="scss">
 .bt {
@@ -201,5 +247,37 @@ onShow(()=>{
     display: flex;
     justify-content: space-around;
   }
+}
+
+.popup-container {
+  position: relative;
+  padding: 20px;
+}
+
+.popup-title {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.popup-input {
+  width: 80%;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.popup-button {
+  width: 50%;
+  height: 40px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  background-color: #007BFF;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
 }
 </style>
