@@ -15,7 +15,7 @@
         prefixIcon="search"
         @input="search"
         v-model="searchContent"
-        placeholder="啦啦啦"
+        placeholder="输入课程名"
         @iconClick="iconClick"
       >
       </uni-easyinput>
@@ -35,26 +35,27 @@
         <view class="sub-Container"
           ><span style="width: 10%"></span>
           <view class="subFun">
-            <button
+            <button class="smallbutton"
               v-show="option[activeBtIndex].name === '我创建的'"
               @tap="startSign(id, item.index)"
             >
               发起签到
             </button>
             <button @tap="toRecord(item.id)">签到记录</button>
-            <button
+            <button class="smallbutton"
               v-show="option[activeBtIndex].name === '我创建的'"
               @tap="toClass(item.index)"
             >
               班级管理
             </button>
-            <button
+            <button class="smallbutton"
               v-show="option[activeBtIndex].name === '我加入的'"
               @tap="Confirm(item.index)"
             >
               进行签到
             </button>
             <button
+              class="smallbutton"
               v-show="option[activeBtIndex].name === '我加入的'"
               @tap="exitClass(item.index)"
             >
@@ -278,9 +279,10 @@ onShow(async (options) => {
   display: flex;
 
   & > button {
-    margin-left: 10px;
+    
     font-weight: 500;
     font-size: 80%;
+    width: 60%;
   }
 }
 
