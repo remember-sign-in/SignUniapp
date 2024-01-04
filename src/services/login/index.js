@@ -5,7 +5,7 @@ export default{
         return http.post("/user/login",params)
     },
     login(code){
-        return http.get(`http://116.62.191.77:80/api/JDQD/getOpenid?code=${code}`)
+        return http.get(`https://j.ojbk.me/api/JDQD/getOpenid?code=${code}`)
     },
  
 }    
