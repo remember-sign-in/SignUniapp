@@ -17,7 +17,7 @@ export default{
         return http.post(`https://j.ojbk.me/user/signUp?id=${params.id}&class_id=${params.class_id}&signIn_number=${params.code}`,params)
     },
     editInfo(params){
-        return http.post(`/user/editInfo?name=${params.name}&id=${params.id}`,params)
+        return http.post(`https://j.ojbk.me/user/editInfo?name=${params.name}&id=${params.id}`,params)
     },
     userInfo(id){
         return http.get(`/user/info/${id}`)
