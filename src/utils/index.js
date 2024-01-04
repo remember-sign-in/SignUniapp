@@ -1,7 +1,7 @@
 //请求
 import { useLoginStore } from "@/store";
 const loginStore = useLoginStore();
-const baseUrl  = 'http://127.0.0.1:4523/m1/3686108-0-default';
+const baseUrl  = '';
 //请求拦截
 const httpInterceptor  = {
     //拦截前触发
@@ -9,7 +9,6 @@ const httpInterceptor  = {
         //1.非http拼接url
        if(!options.url.includes('http')){
         //代理掉 
-        options.url = options.url.replace('/api','');
         options.url = baseUrl + options.url;
        }
        //2.超时处理

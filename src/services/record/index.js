@@ -1,12 +1,12 @@
 import req from "../methods/index";
 const http = new req();
-//http://116.62.191.77:80
+//https://j.ojbk.me
 export default{
     getRecordList(id){
-        return http.get(`http://116.62.191.77:80/record/list/${id}`);
+        return http.get(`https://j.ojbk.me/record/list/${id}`);
     },
     getRecordDetail(id){
-        return http.get(`http://116.62.191.77:80/record/detail?checkin_id=${id}`);
+        return http.get(`https://j.ojbk.me/record/detail?checkin_id=${id}`);
     },
     delRecord(params){
         return http.post("record/del",params);
